@@ -53,7 +53,7 @@ export const Hero: FC = () => {
           </div> */}
         </div>
       </div>
-      <div className="absolute sm:left-1/4 md:left-1/3 lg:left-1/2 xl:left-1/2 inset-y-0 pl-10 pr-4 sm:pr-10">
+      <div className="absolute sm:left-1/4 md:left-1/3 lg:left-1/2 inset-y-0 pl-10 lg:pl-0 ml-0 lg:-ml-20 pr-4 sm:pr-10">
           <Image
             src="/portrait.webp"
             alt="Portrait"
