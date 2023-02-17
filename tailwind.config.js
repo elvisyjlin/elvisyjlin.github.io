@@ -1,0 +1,21 @@
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    fontFamily: {
+      "lexend": ["Lexend"],
+      "serif": ["Playfair Display"],
+      "roboto": ["Roboto"],
+      // "hand": ["Caveat"],
+    },
+    extend: {
+      colors: {
+        "photo-black": "#131313",
+        "github-black": "#24292f",
+      }
+    },
+  },
+  plugins: [],
+}
