@@ -1,4 +1,5 @@
 import { Html, Head, Main, NextScript } from 'next/document'
+import Script from 'next/script'
 
 export default function Document() {
   return (
@@ -14,6 +15,17 @@ export default function Document() {
           // "family=Caveat:wght@400;500;600;700&" +
           "display=swap"
         } rel="stylesheet" />
+        {/* Google tag (gtag.js) */}
+        <Script strategy="afterInteractive" src="https://www.googletagmanager.com/gtag/js?id=UA-127452157-1"></Script>
+        <Script strategy="afterInteractive" dangerouslySetInnerHTML={{
+          __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+          
+            gtag('config', 'UA-127452157-1');
+          `,
+        }}></Script>
       </Head>
       <body>
         <Main />
