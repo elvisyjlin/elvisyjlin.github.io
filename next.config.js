@@ -1,11 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  assetPrefix: ".",
+  // assetPrefix: ".",
   images: {
     domains: [
       "github-readme-stats.vercel.app",
     ],
-    unoptimized: true,
+    // unoptimized: true,
   },
   reactStrictMode: true,
 }

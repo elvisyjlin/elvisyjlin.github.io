@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+li {
+  margin-bottom: .5em;
+}
+
+@media (max-width: 700px) {
+
+  li {
+    margin-bottom: .75em;
+  }
+
+}
+
 /* :root {
   --max-width: 1100px;
   --border-radius: 12px;

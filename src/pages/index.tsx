@@ -1,8 +1,8 @@
 import Head from "next/head";
 import Footer from "@/components/footer";
 import { MyLink } from "@/components/links";
-import { CAREER_ITEMS, EDUCATION_ITEMS, PUBLICATION_ITEMS, TALK_ITEMS } from "@/constants";
 import { GithubStats, Hero, NamedSection } from "@/components/sections";
+import { PAGE } from "@/constants";
 import { AcademicCapIcon, BookOpenIcon, BriefcaseIcon, FireIcon, LightBulbIcon } from "@heroicons/react/24/solid";
 
 export default function Home() {
@@ -21,38 +21,39 @@ export default function Home() {
         <Hero />
         <div className="min-h-screen mx-8 sm:mx-20 md:mx-32 xl:mx-40 my-20 font-lexend flex flex-col justify-center">
           <NamedSection name="Something New" Icon={FireIcon}>
-            <ul>
-              <li className="mb-2">
+            <ul className="font-light">
+              <li>
                 I led a team of 7 to participate in <MyLink href="https://www.blocktempo.com/taipei-ton-hackathon-registration-is-now-open/" target="_blank" rel="noreferrer">Taipei TON Hackathon</MyLink> and got the 1st prize. There were around 50 applications in total, and 8 teams were selected to attend the on-site competition.
               </li>
-              <li className="mb-2">
+              <div className="h-4" />
+              <li>
                 Genki, my startup, was selected as one of the teams in <MyLink href="https://appworks.tw/" target="_blank" rel="noreferrer">AppWorks Accelerator </MyLink>Batch #25.
               </li>
             </ul>
           </NamedSection>
           <NamedSection name="Career" Icon={BriefcaseIcon}>
-            {CAREER_ITEMS.map((item, index) => (
+            {PAGE.career.map((item, index) => (
               <ul key={index}>
-                <li className="mb-2">
+                <li>
                   <div>
                     {item.position} <MyLink href={item.link} target="_blank" rel="noreferrer">{item.name}</MyLink>
                   </div>
                   {item.description && (
-                    <div className="text-zinc-500 font-light">{item.description}</div>
+                    <div className="text-zinc-500 font-light text-sm sm:text-base">{item.description}</div>
                   )}
                 </li>
               </ul>
             ))}
           </NamedSection>
           <NamedSection name="Talks" Icon={LightBulbIcon}>
-            {TALK_ITEMS.map((item, index) => (
+            {PAGE.talks.map((item, index) => (
               <ul key={index}>
-                <li className="mb-2">
+                <li>
                   <div>
                     {item.position} <MyLink href={item.link} target="_blank" rel="noreferrer">{item.name}</MyLink>
                   </div>
                   {item.description && (
-                    <div className="text-zinc-500 font-light">{item.description}</div>
+                    <div className="text-zinc-500 font-light text-sm sm:text-base">{item.description}</div>
                   )}
                 </li>
               </ul>
@@ -60,8 +61,8 @@ export default function Home() {
           </NamedSection>
           <NamedSection name="Publications" Icon={BookOpenIcon}>
             <ul>
-            {PUBLICATION_ITEMS.map((item, index) => (
-              <li className="mb-2" key={index}>
+            {PAGE.publications.map((item, index) => (
+              <li key={index} className="text-sm sm:text-base">
                 <span className="font-light text-zinc-500">
                 {item.authors.map((author, index) => (author === "Yu-Jing Lin" ? (
                     <span key={index}>
@@ -86,14 +87,14 @@ export default function Home() {
             </ul>
           </NamedSection>
           <NamedSection name="Education" Icon={AcademicCapIcon}>
-            {EDUCATION_ITEMS.map((item, index) => (
+            {PAGE.education.map((item, index) => (
               <ul key={index}>
-                <li className="mb-2">
+                <li>
                   <div>
                     {item.position} <MyLink href={item.link} target="_blank" rel="noreferrer">{item.name}</MyLink>
                   </div>
                   {item.description && (
-                    <div className="text-zinc-500 font-light">{item.description}</div>
+                    <div className="text-zinc-500 font-light text-sm sm:text-base">{item.description}</div>
                   )}
                 </li>
               </ul>

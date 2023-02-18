@@ -1,5 +1,6 @@
+import { PAGE } from "@/constants";
 import Image from "next/image";
-import { FC, ReactNode, SVGProps } from "react";
+import { FC, ReactNode, SVGProps, useEffect, useState } from "react";
 import FadeInSection from "./fadein";
 import { GithubIcon, LinkedInIcon } from "./icons";
 import { MyLink, UnderlineLink } from "./links";
@@ -9,7 +10,7 @@ export const Hero: FC = () => {
     <section className="min-h-screen relative">
       <div
         className="absolute sm:right-1/2 inset-y-0 z-10 flex flex-col sm:justify-center 
-        font-lexend bg-gradient-to-b from-white to-white/[.0] sm:bg-none w-screen sm:w-fit"
+        font-lexend sm:bg-none w-screen sm:w-fit"
       >
         <div className="pl-10 sm:pl-20 md:pl-32 xl:pl-40 pr-10 sm:pr-0 py-10 mr-0 md:-mr-18">
           <h1
@@ -36,13 +37,16 @@ export const Hero: FC = () => {
             <p className="font-light">I am a KPOP fan, a dancer and a shutterbug.</p>
             <br />
             <div className="text-xs sm:text-base mt-1 sm:mt-0">
-              <MyLink href="https://pytorch.org/" target="_blank" rel="noreferrer">PyTorch</MyLink>
-              <span> / </span>
-              <MyLink href="https://docs.soliditylang.org/" target="_blank" rel="noreferrer">Solidity</MyLink>
-              <span> / </span>
-              <MyLink href="https://ton.org/docs/develop/func/overview" target="_blank" rel="noreferrer">FunC</MyLink>
-              <span> / </span>
-              <MyLink href="https://tact-lang.org/" target="_blank" rel="noreferrer">Tact</MyLink>
+              {
+                PAGE.skills
+                  .map((item, index) => (
+                    <MyLink key={index} href={item.link} target="_blank" rel="noreferrer">{item.name}</MyLink>
+                  ))
+                  .reduce(
+                    (prev, curr) => prev.length > 0 ? prev.concat([" / ", curr]) : prev.concat([curr]),
+                    [] as ReactNode[],
+                  )
+              }
             </div>
           </div>
           {/* <div className="mt-6 sm:mt-10">
@@ -53,7 +57,10 @@ export const Hero: FC = () => {
           </div> */}
         </div>
       </div>
-      <div className="absolute sm:left-1/4 md:left-1/3 lg:left-1/2 inset-y-0 pl-10 lg:pl-0 ml-0 lg:-ml-20 pr-4 sm:pr-10">
+      <div
+        className="absolute sm:left-1/4 md:left-1/3 lg:left-1/2 inset-y-0 
+        pl-10 lg:pl-0 ml-0 lg:-ml-20 pr-4 sm:pr-10 opacity-25 sm:opacity-100"
+      >
           <Image
             src="/portrait.webp"
             alt="Portrait"
@@ -87,11 +94,26 @@ export const NamedSection: FC<NamedSectionProps> = ({ children, name, Icon }) =>
 };
 
 export const GithubStats: FC = () => {
+  const [screenWidth, setScreenWidth] = useState<number>();
+  useEffect(() => {
+    setScreenWidth(window.innerWidth);
+    window.addEventListener("resize", (e) => {
+      setScreenWidth(window.innerWidth);
+    });
+  }, []);
   return (
     <section className="mx-10 flex flex-col items-center gap-4 sm:gap-6 mb-40 font-lexend">
       <FadeInSection>
         <Image
-          src="https://github-readme-stats.vercel.app/api?username=elvisyjlin&theme=graywhite&show_icons=true&disable_animations=true"
+          src={
+            "https://github-readme-stats.vercel.app/api?" +
+            "username=elvisyjlin" +
+            "&count_private=true" +
+            "&theme=graywhite" +
+            "&show_icons=true" +
+            "&disable_animations=true" +
+            (screenWidth && screenWidth >= 640 ? "" : "&hide_rank=true")  // Hide rank if the window size is smaller than sm (640px)
+          }
           // width={450}
           // height={195}
           width={510}
@@ -101,7 +123,12 @@ export const GithubStats: FC = () => {
         />
       </FadeInSection>
       <FadeInSection>
-        <UnderlineLink className="text-xs sm:text-lg font-roboto font-semibold scale-y-90 text-github-dark opacity-95" href="https://github.com/elvisyjlin" target="_blank" rel="noreferrer">Visit My GitHub</UnderlineLink>
+        <UnderlineLink
+          className="text-sm sm:text-lg font-roboto font-semibold scale-y-90 text-github-dark opacity-95"
+          href="https://github.com/elvisyjlin"
+          target="_blank"
+          rel="noreferrer"
+        >Visit My GitHub</UnderlineLink>
       </FadeInSection>
     </section>
   );

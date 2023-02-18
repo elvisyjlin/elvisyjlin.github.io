@@ -9,8 +9,13 @@ type FadeInSectionProps = {
 const FadeInSection: FC<FadeInSectionProps> = ({ children, className }) => {
   const [isVisible, setVisible] = useState<boolean>(true);
   const domRef = useRef<HTMLDivElement>() as MutableRefObject<HTMLDivElement>;
+  let domRefValue: HTMLDivElement|null = null;
+  const options = {
+    // root: document.querySelector('#scrollArea'),
+    rootMargin: '50px',
+    threshold: 0.0,
+  }
   useEffect(() => {
-    let domRefValue: HTMLDivElement|null = null;
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         // Reset isVisible when the element is below the window view
@@ -18,7 +23,7 @@ const FadeInSection: FC<FadeInSectionProps> = ({ children, className }) => {
           setVisible(entry.isIntersecting);
         }
       });
-    });
+    }, options);
     observer.observe(domRef.current);
     domRefValue = domRef.current;
     // Avoid memory leak

@@ -4,7 +4,7 @@ export const MyLink: FC<HTMLProps<HTMLAnchorElement>> = ({ ...props }) => {
   return (
     <a
       {...props}
-      className={`text-orange-900 hover:text-orange-500 transition duration-300 ${props.className}`}
+      className={`text-orange-900 hover:text-amber-600 transition duration-300 ${props.className}`}
     >{props.children}</a>
   )
 };
