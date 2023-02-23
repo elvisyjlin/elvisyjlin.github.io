@@ -2,6 +2,7 @@ import { PAGE } from "@/constants";
 import { Playfair_Display, Roboto } from "@next/font/google";
 import Image from "next/image";
 import { FC, ReactNode, SVGProps, useEffect, useState } from "react";
+import { easeInOutCubic } from "./easingFn";
 import FadeInSection from "./fadein";
 import { GithubIcon, LinkedInIcon } from "./icons";
 import { MyLink, UnderlineLink } from "./links";
@@ -10,18 +11,23 @@ const playfairDisplay = Playfair_Display({ subsets: ["latin"], display: "swap" }
 const roboto = Roboto({ weight: ["400", "500", "700"], subsets: ["latin"], display: "swap" });
 
 export const Hero: FC = () => {
-  const offsetBegin = 100;
+  const offsetBegin = 0;
   const offsetEnd = 0;
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
+      // Only apply on sm view (640px)
       if (window.innerWidth < 640) {
         const content = document.getElementById("content");
         const portrait = document.getElementById("portrait");
         if (content && portrait) {
-          const progress = Math.min(Math.max(window.scrollY - offsetBegin, 0) / Math.max(window.innerHeight - portrait.clientHeight - offsetBegin - offsetEnd, 1), 1);
+          // Calculate the scroll progress with an easing function
+          let progress = Math.min(Math.max(window.scrollY - offsetBegin, 0) / Math.max(window.innerHeight - portrait.clientHeight - offsetBegin - offsetEnd, 1), 1);
+          progress = Math.min(Math.max(easeInOutCubic(progress), 0), 1);
+          // Calculate the opacity of content
           const contentOpacity = (Math.round((1 - progress) * 100) / 100).toString();
           content.style.opacity = contentOpacity;
+          // Calculate the opacity of portrait
           const portraitOpacity = 0.25 + progress * 0.75;
           portrait.style.opacity = (Math.round(portraitOpacity * 100) / 100).toString();
         }
@@ -85,7 +91,7 @@ export const Hero: FC = () => {
         </div>
       </div>
       <div
-        className="absolute h-full w-full sm:left-1/4 md:left-1/3 lg:left-1/2 inset-y-0"
+        className="absolute w-screen sm:w-3/4 sm:left-1/4 md:w-2/3 md:left-1/3 lg:w-1/2 lg:left-1/2 inset-y-0"
       >
         <Image
           priority
@@ -94,7 +100,7 @@ export const Hero: FC = () => {
           alt="Portrait"
           width={1359}
           height={2000}
-          className="absolute bottom-0 opacity-25 sm:opacity-100 pl-10 lg:pl-0 ml-0 lg:-ml-20 pr-4 sm:pr-10"
+          className="absolute bottom-0 opacity-25 sm:opacity-100 pl-10 lg:pl-0 ml-0 lg:-ml-20 pr-4 sm:pr-10 object-contain max-h-screen"
         />
       </div>
     </section>
