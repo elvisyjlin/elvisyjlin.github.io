@@ -13,14 +13,19 @@ export default function Document() {
           "family=Lexend:wght@100;200;300;400;500;600;700;800;900&" +
           "family=Roboto:wght@100;300;400;500;700;900&" +
           // "family=Caveat:wght@400;500;600;700&" +
+          // "family=Lora:wght@400;500;600;700&" +
+          // "family=Frank+Ruhl+Libre:wght@300;400;500;600;700;800;900&" +
+          // "family=DM+Serif+Display&" +
           "display=swap"
         } rel="stylesheet" />
         {/* Google tag (gtag.js) */}
         <Script
+          async
           strategy="afterInteractive"
           src="https://www.googletagmanager.com/gtag/js?id=UA-127452157-1"
         />
         <Script
+          async
           id="ga4"
           strategy="afterInteractive"
           dangerouslySetInnerHTML={{

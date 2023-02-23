@@ -9,6 +9,9 @@ module.exports = {
       "serif": ["Playfair Display"],
       "roboto": ["Roboto"],
       // "hand": ["Caveat"],
+      // "lora": ["Lora"],
+      // "frank": ["Frank Ruhl Libre"],
+      // "dm-serif": ["DM Serif Display"],
     },
     extend: {
       colors: {
