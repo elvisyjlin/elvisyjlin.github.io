@@ -2,7 +2,7 @@ import { FC, MutableRefObject, ReactNode, useEffect, useRef, useState } from "re
 import styles from "@/styles/FadeIn.module.css";
 
 type FadeInSectionProps = {
-  children?: ReactNode[]|ReactNode|string;
+  children?: ReactNode[] | ReactNode | string;
   className?: string;
 }
 
@@ -10,7 +10,7 @@ const FadeInSection: FC<FadeInSectionProps> = ({ children, className }) => {
   const [isVisible, setVisible] = useState<boolean>(true);
   const domRef = useRef<HTMLDivElement>() as MutableRefObject<HTMLDivElement>;
   useEffect(() => {
-    let domRefValue: HTMLDivElement|null = null;
+    let domRefValue: HTMLDivElement | null = null;
     const options = {
       // root: document.querySelector('#scrollArea'),
       rootMargin: '40px',

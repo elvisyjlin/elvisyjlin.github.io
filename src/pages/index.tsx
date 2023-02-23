@@ -64,29 +64,29 @@ export default function Home() {
           </NamedSection>
           <NamedSection name="Publications" Icon={BookOpenIcon}>
             <ul>
-            {PAGE.publications.map((item, index) => (
-              <li key={index} className="text-sm sm:text-base">
-                <span className="font-light text-zinc-500">
-                {item.authors.map((author, index) => (author === "Yu-Jing Lin" ? (
-                    <span key={index}>
-                      {index > 0 && <span>, </span>}
-                      <b className="font-medium">Yu-Jing Lin</b>
-                    </span>
-                  ) : (
-                    <span key={index}>
-                      {index > 0 && <span>, </span>}
-                      <span>{author}</span>
-                    </span>
-                  )))
-                }.&nbsp;
-                </span>
-                <span>{item.name}.&nbsp;</span>
-                <span className="font-light text-zinc-500">{item.description}&nbsp;</span>
-                {item.link && (
-                  <MyLink href={item.link} target="_blank" rel="noreferrer">[arXiv]</MyLink>
-                )}
-              </li>
-            ))}
+              {PAGE.publications.map((item, index) => (
+                <li key={index} className="text-sm sm:text-base">
+                  <span className="font-light text-zinc-500">
+                    {item.authors.map((author, index) => (author === "Yu-Jing Lin" ? (
+                      <span key={index}>
+                        {index > 0 && <span>, </span>}
+                        <b className="font-medium">Yu-Jing Lin</b>
+                      </span>
+                    ) : (
+                      <span key={index}>
+                        {index > 0 && <span>, </span>}
+                        <span>{author}</span>
+                      </span>
+                    )))
+                    }.&nbsp;
+                  </span>
+                  <span>{item.name}.&nbsp;</span>
+                  <span className="font-light text-zinc-500">{item.description}&nbsp;</span>
+                  {item.link && (
+                    <MyLink href={item.link} target="_blank" rel="noreferrer">[arXiv]</MyLink>
+                  )}
+                </li>
+              ))}
             </ul>
           </NamedSection>
           <NamedSection name="Education" Icon={AcademicCapIcon}>
@@ -106,7 +106,7 @@ export default function Home() {
           <GithubStats />
         </div>
         <Footer />
-     
+
         {/* <div className="opacity-30">
           <div>
               <svg
