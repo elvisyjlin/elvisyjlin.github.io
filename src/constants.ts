@@ -86,7 +86,7 @@ export const PAGE = {
     },
     {
       name: "An Evaluation of Bitcoin Address Classification based on Transaction History Summarization",
-      description: "ICBC 2019",
+      description: "ICBC 2019 (Oral Speaker)",
       link: "https://arxiv.org/abs/1903.07994",
       authors: [
         "Yu-Jing Lin",
@@ -110,7 +110,7 @@ export const PAGE = {
     },
     {
       name: "Personalized Difficulty Adjustment for Countering the Double-Spending Attack in Proof-of-Work Consensus Protocols",
-      description: "Blockchain 2018",
+      description: "Blockchain 2018 (Oral Speaker)",
       link: "https://arxiv.org/abs/1807.02933",
       authors: [
         "Chi-Ning Chou",

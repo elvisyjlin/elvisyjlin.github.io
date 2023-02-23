@@ -12,9 +12,10 @@ const roboto = Roboto({ weight: ["400", "500", "700"], subsets: ["latin"], displ
 
 export const Hero: FC = () => {
   const offsetBegin = 0;
-  const offsetEnd = 0;
+  const offsetEnd = -80;
 
   useEffect(() => {
+    // Fade in the portrait and fade out the content when the user scrolls down. Vice versa.
     window.addEventListener("scroll", () => {
       // Only apply on sm view (640px)
       if (window.innerWidth < 640) {
@@ -51,7 +52,7 @@ export const Hero: FC = () => {
             xl:text-7xl xl:leading-[1.1]"
           >Hello, I am<br />Elvis</h1>
           <div className="mt-6 sm:mt-10 pb-60 sm:pb-0">
-            <div className="flex gap-2 items-center">
+            <div className="flex gap-4 items-center">
               <p>aka Yu Jing Lin</p>
               <MyLink href="https://github.com/elvisyjlin" target="_blank" rel="noreferrer">
                 <GithubIcon className="h-5 w-5 fill-current" />
@@ -129,12 +130,14 @@ export const NamedSection: FC<NamedSectionProps> = ({ children, name, Icon }) =>
 
 export const GithubStats: FC = () => {
   const [screenWidth, setScreenWidth] = useState<number>();
+
   useEffect(() => {
     setScreenWidth(window.innerWidth);
     window.addEventListener("resize", (e) => {
       setScreenWidth(window.innerWidth);
     });
   }, []);
+
   return (
     <section className="flex flex-col items-center gap-4 sm:gap-6 my-12">
       <FadeInSection>
@@ -156,6 +159,7 @@ export const GithubStats: FC = () => {
           loading="lazy"
         />
       </FadeInSection>
+      {/* Hide the Github contribution graph on small devices */}
       <FadeInSection className="hidden lg:block">
         <div className="p-6 border border-gray-200 rounded">
           <Image
