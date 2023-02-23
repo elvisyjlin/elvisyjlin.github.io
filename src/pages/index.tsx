@@ -4,6 +4,9 @@ import { MyLink } from "@/components/links";
 import { GithubStats, Hero, NamedSection } from "@/components/sections";
 import { PAGE } from "@/constants";
 import { AcademicCapIcon, BookOpenIcon, BriefcaseIcon, FireIcon, LightBulbIcon } from "@heroicons/react/24/solid";
+import { Lexend } from "@next/font/google";
+
+const lexend = Lexend({ subsets: ["latin"], display: "swap" });
 
 export default function Home() {
   return (
@@ -17,9 +20,9 @@ export default function Home() {
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
       </Head>
-      <main className="text-photo-black">
+      <main style={lexend.style} className="text-photo-black leading-snug sm:leading-normal">
         <Hero />
-        <div className="min-h-screen mx-6 sm:mx-20 md:mx-32 xl:mx-40 my-12 sm:my-24 font-lexend leading-snug sm:leading-normal flex flex-col justify-center">
+        <div className="min-h-screen mx-6 sm:mx-20 md:mx-32 xl:mx-40 my-12 sm:my-24 flex flex-col justify-center">
           <NamedSection name="Something New" Icon={FireIcon}>
             <ul className="font-light">
               <li>

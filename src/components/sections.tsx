@@ -1,21 +1,28 @@
 import { PAGE } from "@/constants";
+import { Playfair_Display, Roboto } from "@next/font/google";
 import Image from "next/image";
 import { FC, ReactNode, SVGProps, useEffect, useState } from "react";
 import FadeInSection from "./fadein";
 import { GithubIcon, LinkedInIcon } from "./icons";
 import { MyLink, UnderlineLink } from "./links";
 
+const playfairDisplay = Playfair_Display({ subsets: ["latin"], display: "swap" });
+const roboto = Roboto({ weight: ["400", "500", "700"], subsets: ["latin"], display: "swap" });
+
 export const Hero: FC = () => {
   return (
     <section className="min-h-screen relative">
       <div
         className="absolute sm:right-1/2 inset-y-0 z-10 flex flex-col sm:justify-center 
-        font-lexend leading-snug sm:leading-normal sm:bg-none w-screen sm:w-fit"
+        sm:bg-none w-screen sm:w-fit"
       >
         <div className="pl-6 sm:pl-20 md:pl-32 xl:pl-40 pr-6 sm:pr-0 py-12 mr-0 md:-mr-18">
           <h1
-            className="scale-y-95 tracking-[.015em] font-serif font-bold 
-            text-4xl sm:text-5xl sm:leading-[1.1] md:text-6xl md:leading-[1.1] xl:text-7xl xl:leading-[1.1]"
+            style={playfairDisplay.style}
+            className="scale-y-95 tracking-[.015em] font-bold 
+            text-4xl sm:text-5xl sm:leading-[1.1] 
+            md:text-6xl md:leading-[1.1] 
+            xl:text-7xl xl:leading-[1.1]"
           >Hello, I am<br />Elvis</h1>
           <div className="mt-6 sm:mt-10 pb-60 sm:pb-0">
             <div className="flex gap-2 items-center">
@@ -62,6 +69,7 @@ export const Hero: FC = () => {
         pl-10 lg:pl-0 ml-0 lg:-ml-20 pr-4 sm:pr-10 opacity-25 sm:opacity-100"
       >
           <Image
+            priority
             src="/portrait.webp"
             alt="Portrait"
             width={1359}
@@ -102,7 +110,7 @@ export const GithubStats: FC = () => {
     });
   }, []);
   return (
-    <section className="flex flex-col items-center gap-4 sm:gap-6 my-12 font-lexend">
+    <section className="flex flex-col items-center gap-4 sm:gap-6 my-12">
       <FadeInSection>
         <Image
           src={
@@ -136,7 +144,8 @@ export const GithubStats: FC = () => {
       </FadeInSection>
       <FadeInSection>
         <UnderlineLink
-          className="sm:text-lg font-roboto font-semibold scale-y-90 text-github-dark opacity-95"
+          style={roboto.style}
+          className="sm:text-lg font-semibold scale-y-90 text-github-dark opacity-95"
           href="https://github.com/elvisyjlin"
           target="_blank"
           rel="noreferrer"

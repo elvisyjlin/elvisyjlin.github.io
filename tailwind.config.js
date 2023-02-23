@@ -5,9 +5,9 @@ module.exports = {
   ],
   theme: {
     fontFamily: {
-      "lexend": ["Lexend"],
-      "serif": ["Playfair Display"],
-      "roboto": ["Roboto"],
+      // "lexend": ["Lexend"],
+      // "serif": ["Playfair Display"],
+      // "roboto": ["Roboto"],
       // "hand": ["Caveat"],
       // "lora": ["Lora"],
       // "frank": ["Frank Ruhl Libre"],
