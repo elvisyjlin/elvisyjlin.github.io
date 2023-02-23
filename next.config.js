@@ -2,8 +2,10 @@
 const nextConfig = {
   // assetPrefix: ".",
   images: {
+    dangerouslyAllowSVG: true,
     domains: [
       "github-readme-stats.vercel.app",
+      "ghchart.rshah.org",
     ],
     // unoptimized: true,
   },

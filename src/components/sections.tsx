@@ -122,6 +122,18 @@ export const GithubStats: FC = () => {
           loading="lazy"
         />
       </FadeInSection>
+      <FadeInSection className="hidden lg:block">
+        <div className="p-6 border border-gray-200 rounded">
+          <Image
+            src="https://ghchart.rshah.org/131313/elvisyjlin"
+            alt="Github Contributions of elvisyjlin"
+            // width={663}
+            // height={104}
+            width={730}
+            height={114}
+          />
+        </div>
+      </FadeInSection>
       <FadeInSection>
         <UnderlineLink
           className="sm:text-lg font-roboto font-semibold scale-y-90 text-github-dark opacity-95"
