@@ -10,9 +10,29 @@ const playfairDisplay = Playfair_Display({ subsets: ["latin"], display: "swap" }
 const roboto = Roboto({ weight: ["400", "500", "700"], subsets: ["latin"], display: "swap" });
 
 export const Hero: FC = () => {
+  const offsetBegin = 100;
+  const offsetEnd = 0;
+
+  useEffect(() => {
+    window.addEventListener("scroll", () => {
+      if (window.innerWidth < 640) {
+        const content = document.getElementById("content");
+        const portrait = document.getElementById("portrait");
+        if (content && portrait) {
+          const progress = Math.min(Math.max(window.scrollY - offsetBegin, 0) / Math.max(window.innerHeight - portrait.clientHeight - offsetBegin - offsetEnd, 1), 1);
+          const contentOpacity = (Math.round((1 - progress) * 100) / 100).toString();
+          content.style.opacity = contentOpacity;
+          const portraitOpacity = 0.25 + progress * 0.75;
+          portrait.style.opacity = (Math.round(portraitOpacity * 100) / 100).toString();
+        }
+      }
+    });
+  }, []);
+
   return (
     <section className="min-h-screen relative">
       <div
+        id="content"
         className="absolute sm:right-1/2 inset-y-0 z-10 flex flex-col sm:justify-center 
         sm:bg-none w-screen sm:w-fit"
       >
@@ -65,24 +85,24 @@ export const Hero: FC = () => {
         </div>
       </div>
       <div
-        className="absolute sm:left-1/4 md:left-1/3 lg:left-1/2 inset-y-0 
-        pl-10 lg:pl-0 ml-0 lg:-ml-20 pr-4 sm:pr-10 opacity-25 sm:opacity-100"
+        className="absolute h-full w-full sm:left-1/4 md:left-1/3 lg:left-1/2 inset-y-0"
       >
-          <Image
-            priority
-            src="/portrait.webp"
-            alt="Portrait"
-            width={1359}
-            height={2000}
-            className="h-full object-contain object-bottom"
-          />
+        <Image
+          priority
+          id="portrait"
+          src="/portrait.webp"
+          alt="Portrait"
+          width={1359}
+          height={2000}
+          className="absolute bottom-0 opacity-25 sm:opacity-100 pl-10 lg:pl-0 ml-0 lg:-ml-20 pr-4 sm:pr-10"
+        />
       </div>
     </section>
   );
 };
 
 type NamedSectionProps = {
-  children?: ReactNode[]|ReactNode|string;
+  children?: ReactNode[] | ReactNode | string;
   name: string;
   Icon: FC<SVGProps<SVGSVGElement>>;
 };
