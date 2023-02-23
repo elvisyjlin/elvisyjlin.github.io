@@ -19,11 +19,11 @@ export default function Home() {
       </Head>
       <main className="text-photo-black">
         <Hero />
-        <div className="min-h-screen mx-8 sm:mx-20 md:mx-32 xl:mx-40 my-20 font-lexend flex flex-col justify-center">
+        <div className="min-h-screen mx-6 sm:mx-20 md:mx-32 xl:mx-40 my-12 sm:my-24 font-lexend leading-snug sm:leading-normal flex flex-col justify-center">
           <NamedSection name="Something New" Icon={FireIcon}>
             <ul className="font-light">
               <li>
-                I led a team of 7 to participate in <MyLink href="https://www.blocktempo.com/taipei-ton-hackathon-registration-is-now-open/" target="_blank" rel="noreferrer">Taipei TON Hackathon</MyLink> and got the 1st prize. There were around 50 applications in total, and 8 teams were selected to attend the on-site competition.
+                I led a team of 7 to participate in <MyLink href="https://www.blocktempo.com/taipei-ton-hackathon-registration-is-now-open/" target="_blank" rel="noreferrer">Taipei TON Hackathon</MyLink> and we got the 1st prize. There were around 50 applications in total, and 8 teams were selected to attend the on-site competition.
               </li>
               <div className="h-4" />
               <li>
@@ -100,8 +100,8 @@ export default function Home() {
               </ul>
             ))}
           </NamedSection>
+          <GithubStats />
         </div>
-        <GithubStats />
         <Footer />
      
         {/* <div className="opacity-30">

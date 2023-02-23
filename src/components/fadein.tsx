@@ -13,7 +13,7 @@ const FadeInSection: FC<FadeInSectionProps> = ({ children, className }) => {
     let domRefValue: HTMLDivElement|null = null;
     const options = {
       // root: document.querySelector('#scrollArea'),
-      rootMargin: '50px',
+      rootMargin: '40px',
       threshold: 0.0,
     }
     const observer = new IntersectionObserver((entries) => {

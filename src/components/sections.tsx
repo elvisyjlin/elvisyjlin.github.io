@@ -10,9 +10,9 @@ export const Hero: FC = () => {
     <section className="min-h-screen relative">
       <div
         className="absolute sm:right-1/2 inset-y-0 z-10 flex flex-col sm:justify-center 
-        font-lexend sm:bg-none w-screen sm:w-fit"
+        font-lexend leading-snug sm:leading-normal sm:bg-none w-screen sm:w-fit"
       >
-        <div className="pl-10 sm:pl-20 md:pl-32 xl:pl-40 pr-10 sm:pr-0 py-10 mr-0 md:-mr-18">
+        <div className="pl-6 sm:pl-20 md:pl-32 xl:pl-40 pr-6 sm:pr-0 py-12 mr-0 md:-mr-18">
           <h1
             className="scale-y-95 tracking-[.015em] font-serif font-bold 
             text-4xl sm:text-5xl sm:leading-[1.1] md:text-6xl md:leading-[1.1] xl:text-7xl xl:leading-[1.1]"
@@ -102,7 +102,7 @@ export const GithubStats: FC = () => {
     });
   }, []);
   return (
-    <section className="mx-10 flex flex-col items-center gap-4 sm:gap-6 mb-40 font-lexend">
+    <section className="flex flex-col items-center gap-4 sm:gap-6 my-12 font-lexend">
       <FadeInSection>
         <Image
           src={
@@ -118,13 +118,13 @@ export const GithubStats: FC = () => {
           // height={195}
           width={510}
           height={221}
-          alt="Github stats of elvisyjlin"
+          alt="Github Stats of elvisyjlin"
           loading="lazy"
         />
       </FadeInSection>
       <FadeInSection>
         <UnderlineLink
-          className="text-sm sm:text-lg font-roboto font-semibold scale-y-90 text-github-dark opacity-95"
+          className="sm:text-lg font-roboto font-semibold scale-y-90 text-github-dark opacity-95"
           href="https://github.com/elvisyjlin"
           target="_blank"
           rel="noreferrer"

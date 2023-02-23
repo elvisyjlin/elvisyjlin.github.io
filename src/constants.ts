@@ -66,8 +66,8 @@ export const PAGE = {
   talks: [
     {
       name: "COSCUP 2019",
-      position: "Speaker",
-      description: "Blockchain and Distributed Ledger",
+      position: "Speaker of",
+      description: "Blockchain and Distributed Ledger Track",
       link: "https://coscup.org/2019/en/programs/an-evaluation-of-bitcoin-address-classification-based-on-transaction-history-summarization",
     },
   ],
