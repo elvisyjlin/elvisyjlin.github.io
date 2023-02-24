@@ -2,7 +2,7 @@ import { PAGE } from "@/constants";
 import { Playfair_Display, Roboto } from "@next/font/google";
 import Image from "next/image";
 import { FC, ReactNode, SVGProps, useEffect, useState } from "react";
-import { easeInCubic } from "./easingFn";
+import { easeInOutExpo } from "./easingFn";
 import FadeInSection from "./fadein";
 import { GithubIcon, LinkedInIcon } from "./icons";
 import { MyLink, UnderlineLink } from "./links";
@@ -12,7 +12,7 @@ const roboto = Roboto({ weight: ["400", "500", "700"], subsets: ["latin"], displ
 
 export const Hero: FC = () => {
   const offsetBegin = 0;
-  const offsetEnd = 0;
+  const offsetEnd = -120;
 
   useEffect(() => {
     function adjustOpacity() {
@@ -21,7 +21,7 @@ export const Hero: FC = () => {
       if (content && portrait) {
         // Calculate the scroll progress with an easing function
         let progress = Math.min(Math.max(window.scrollY - offsetBegin, 0) / Math.max(window.innerHeight - portrait.clientHeight - offsetBegin - offsetEnd, 1), 1);
-        progress = Math.min(Math.max(easeInCubic(progress), 0), 1);
+        progress = Math.min(Math.max(easeInOutExpo(progress), 0), 1);
         // Calculate the opacity of content
         const contentOpacity = (Math.round((1 - progress) * 100) / 100).toString();
         content.style.opacity = contentOpacity;
