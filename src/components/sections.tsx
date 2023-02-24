@@ -2,7 +2,7 @@ import { PAGE } from "@/constants";
 import { Playfair_Display, Roboto } from "@next/font/google";
 import Image from "next/image";
 import { FC, ReactNode, SVGProps, useEffect, useState } from "react";
-import { easeInOutCubic } from "./easingFn";
+import { easeInCubic } from "./easingFn";
 import FadeInSection from "./fadein";
 import { GithubIcon, LinkedInIcon } from "./icons";
 import { MyLink, UnderlineLink } from "./links";
@@ -12,25 +12,41 @@ const roboto = Roboto({ weight: ["400", "500", "700"], subsets: ["latin"], displ
 
 export const Hero: FC = () => {
   const offsetBegin = 0;
-  const offsetEnd = -80;
+  const offsetEnd = 0;
 
   useEffect(() => {
+    function adjustOpacity() {
+      const content = document.getElementById("content");
+      const portrait = document.getElementById("portrait");
+      if (content && portrait) {
+        // Calculate the scroll progress with an easing function
+        let progress = Math.min(Math.max(window.scrollY - offsetBegin, 0) / Math.max(window.innerHeight - portrait.clientHeight - offsetBegin - offsetEnd, 1), 1);
+        progress = Math.min(Math.max(easeInCubic(progress), 0), 1);
+        // Calculate the opacity of content
+        const contentOpacity = (Math.round((1 - progress) * 100) / 100).toString();
+        content.style.opacity = contentOpacity;
+        // Calculate the opacity of portrait
+        const portraitOpacity = 0.25 + progress * 0.75;
+        portrait.style.opacity = (Math.round(portraitOpacity * 100) / 100).toString();
+      }
+    }
     // Fade in the portrait and fade out the content when the user scrolls down. Vice versa.
     window.addEventListener("scroll", () => {
       // Only apply on sm view (640px)
       if (window.innerWidth < 640) {
-        const content = document.getElementById("content");
-        const portrait = document.getElementById("portrait");
-        if (content && portrait) {
-          // Calculate the scroll progress with an easing function
-          let progress = Math.min(Math.max(window.scrollY - offsetBegin, 0) / Math.max(window.innerHeight - portrait.clientHeight - offsetBegin - offsetEnd, 1), 1);
-          progress = Math.min(Math.max(easeInOutCubic(progress), 0), 1);
-          // Calculate the opacity of content
-          const contentOpacity = (Math.round((1 - progress) * 100) / 100).toString();
-          content.style.opacity = contentOpacity;
-          // Calculate the opacity of portrait
-          const portraitOpacity = 0.25 + progress * 0.75;
-          portrait.style.opacity = (Math.round(portraitOpacity * 100) / 100).toString();
+        adjustOpacity();
+      }
+    });
+    // Set correct opacity values when the window is resized
+    window.addEventListener("resize", () => {
+      const content = document.getElementById("content");
+      const portrait = document.getElementById("portrait");
+      if (content && portrait) {
+        if (window.innerWidth < 640) {
+          adjustOpacity();
+        } else {
+          content.style.opacity = "1";
+          portrait.style.opacity = "1";
         }
       }
     });
@@ -51,33 +67,33 @@ export const Hero: FC = () => {
             md:text-6xl md:leading-[1.1] 
             xl:text-7xl xl:leading-[1.1]"
           >Hello, I am<br />Elvis</h1>
-          <div className="mt-6 sm:mt-10 pb-60 sm:pb-0">
+          <div className="mt-6 sm:mt-10 ml-[2px] pb-60 sm:pb-0">
             <div className="flex gap-4 items-center">
-              <p>aka Yu Jing Lin</p>
+              <p className="font-semibold">aka Yu Jing Lin</p>
               <MyLink href="https://github.com/elvisyjlin" target="_blank" rel="noreferrer">
-                <GithubIcon className="h-5 w-5 fill-current" />
+                <GithubIcon className="-mt-[2.5px] h-5 w-5 fill-current" />
               </MyLink>
               <MyLink href="https://www.linkedin.com/in/elvisyjlin" target="_blank" rel="noreferrer">
-                <LinkedInIcon className="h-5 w-5 fill-current" />
+                <LinkedInIcon className="-mt-[2.5px] h-5 w-5 fill-current" />
               </MyLink>
             </div>
             <br />
-            <p>About Me</p>
-            <p className="font-light">I am the co-founder of Genki.</p>
-            <p className="font-light">I was an NLP model engineer at Microsoft.</p>
-            <p className="font-light">I love computer vision, natural language processing, and decentralization.</p>
+            <p className="font-semibold">About Me</p>
+            <p>I am the co-founder of Genki.</p>
+            <p>I was an NLP model engineer at Microsoft.</p>
+            <p>I love computer vision, natural language processing, and decentralization.</p>
             <br />
-            <p>You don&apos;t need to know but...</p>
-            <p className="font-light">I am a KPOP fan, a dancer and a shutterbug.</p>
+            <p className="font-semibold">You don&apos;t need to know but...</p>
+            <p>I am a KPOP fan, a dancer and a shutterbug.</p>
             <br />
-            <div className="text-xs sm:text-base mt-1 sm:mt-0">
+            <div className="text-base sm:text-lg mt-1 sm:mt-0 flex flex-wrap gap-1.5 sm:gap-2">
               {
                 PAGE.skills
                   .map((item, index) => (
                     <MyLink key={index} href={item.link} target="_blank" rel="noreferrer">{item.name}</MyLink>
                   ))
                   .reduce(
-                    (prev, curr) => prev.length > 0 ? prev.concat([" / ", curr]) : prev.concat([curr]),
+                    (prev, curr) => prev.length > 0 ? prev.concat(["•", curr]) : prev.concat([curr]),
                     [] as ReactNode[],
                   )
               }
@@ -118,9 +134,9 @@ export const NamedSection: FC<NamedSectionProps> = ({ children, name, Icon }) =>
   return (
     <FadeInSection>
       <section className="sm:grid sm:grid-cols-12 mb-8 gap-8">
-        <div className="mb-8 sm:col-span-4 lg:col-span-3 3xl:col-span-2 flex gap-2">
-          <Icon className="h-5 text-zinc-500 mt-[4px]" />
-          <h2 className="text-lg font-semibold text-zinc-500">{name}</h2>
+        <div className="mb-8 sm:col-span-4 lg:col-span-3 3xl:col-span-2 flex gap-2.5 text-zinc-600">
+          <Icon className="h-5 mt-[2.5px]" />
+          <h2 className="text-lg font-semibold">{name}</h2>
         </div>
         <div className="sm:col-span-8 lg:col-span-9 3xl:col-span-10">{children}</div>
       </section>
