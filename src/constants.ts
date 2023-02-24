@@ -81,7 +81,7 @@ export const PAGE = {
         "Yu-Jing Lin",
         "Che-Han Chang",
         "Edward Y. Chang",
-        "Shih-Wei Liao",
+        "Shih-wei Liao",
       ],
     },
     {
