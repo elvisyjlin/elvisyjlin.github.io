@@ -1,7 +1,8 @@
 import { PAGE } from "@/constants";
+import { BookOpenIcon, FireIcon } from "@heroicons/react/24/solid";
 import { Playfair_Display, Roboto } from "@next/font/google";
 import Image from "next/image";
-import { FC, ReactNode, SVGProps, useEffect, useState } from "react";
+import { FC, ForwardRefExoticComponent, ReactNode, SVGProps, useEffect, useState } from "react";
 import { easeInOutExpo } from "./easingFn";
 import FadeInSection from "./fadein";
 import { GithubIcon, LinkedInIcon } from "./icons";
@@ -141,6 +142,84 @@ export const NamedSection: FC<NamedSectionProps> = ({ children, name, Icon }) =>
         <div className="sm:col-span-8 lg:col-span-9 3xl:col-span-10">{children}</div>
       </section>
     </FadeInSection>
+  );
+};
+
+export const News: FC = () => {
+  return (
+    <NamedSection name="NEWS" Icon={FireIcon}>
+      <ul>
+        <li>
+          <p>I led a team of 7 to participate in <MyLink href="https://www.blocktempo.com/taipei-ton-hackathon-registration-is-now-open/" target="_blank" rel="noreferrer">Taipei TON Hackathon</MyLink> and we got the 1st prize. There were around 50 applications in total, and 8 teams were selected to attend the on-site competition.</p>
+        </li>
+        <div className="h-4" />
+        <li>
+          <p>Genki, my startup, was selected as one of the teams in <MyLink href="https://appworks.tw/" target="_blank" rel="noreferrer">AppWorks Accelerator </MyLink>Batch #25.</p>
+        </li>
+      </ul>
+    </NamedSection>
+  );
+};
+
+type CareerProps = {
+  name: string;
+  Icon: ForwardRefExoticComponent<SVGProps<SVGSVGElement>>;
+  items: {
+    name: string;
+    position: string;
+    description: string;
+    link: string;
+  }[];
+};
+
+export const Career: FC<CareerProps> = ({ name, Icon, items }) => {
+  return (
+    <NamedSection name={name} Icon={Icon}>
+      {items.map((item, index) => (
+        <ul key={index}>
+          <li>
+            <div>
+              {item.position} <MyLink href={item.link} target="_blank" rel="noreferrer">{item.name}</MyLink>
+            </div>
+            {item.description && (
+              <div className="text-zinc-400 text-base sm:text-lg">{item.description}</div>
+            )}
+          </li>
+        </ul>
+      ))}
+    </NamedSection>
+  );
+};
+
+export const Publications: FC = () => {
+  return (
+    <NamedSection name="PUBLICATIONS" Icon={BookOpenIcon}>
+      <ul>
+        {PAGE.publications.map((item, index) => (
+          <li key={index} className="text-base sm:text-lg">
+            <span className="text-zinc-400">
+              {item.authors.map((author, index) => (author === "Yu-Jing Lin" ? (
+                <span key={index}>
+                  {index > 0 && <span>, </span>}
+                  <MyLink href="https://arxiv.org/search/cs?query=Lin%2C+Yu-Jing&searchtype=author">Yu-Jing Lin</MyLink>
+                </span>
+              ) : (
+                <span key={index}>
+                  {index > 0 && <span>, </span>}
+                  <span>{author}</span>
+                </span>
+              )))
+              }.&nbsp;
+            </span>
+            <span>{item.name}.&nbsp;</span>
+            <span className="text-zinc-400">{item.description}&nbsp;</span>
+            {item.link && (
+              <MyLink href={item.link} target="_blank" rel="noreferrer">[arXiv]</MyLink>
+            )}
+          </li>
+        ))}
+      </ul>
+    </NamedSection>
   );
 };
 

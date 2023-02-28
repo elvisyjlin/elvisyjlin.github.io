@@ -1,9 +1,8 @@
 import Head from "next/head";
 import Footer from "@/components/footer";
-import { MyLink } from "@/components/links";
-import { GithubStats, Hero, NamedSection } from "@/components/sections";
+import { Career, GithubStats, Hero, News, Publications } from "@/components/sections";
 import { PAGE } from "@/constants";
-import { AcademicCapIcon, BookOpenIcon, BriefcaseIcon, FireIcon, LightBulbIcon } from "@heroicons/react/24/solid";
+import { AcademicCapIcon, BriefcaseIcon, LightBulbIcon } from "@heroicons/react/24/solid";
 import { Source_Serif_Pro } from "@next/font/google";
 
 // const lexend = Lexend({ subsets: ["latin"], display: "swap" });
@@ -25,86 +24,11 @@ export default function Home() {
       <main style={sourceSerifPro.style} className="text-lg text-photo-black leading-snug sm:leading-normal">
         <Hero />
         <div className="min-h-screen mx-6 sm:mx-20 md:mx-32 xl:mx-40 my-12 sm:my-24 flex flex-col justify-center">
-          <NamedSection name="NEWS" Icon={FireIcon}>
-            <ul>
-              <li>
-                <p>I led a team of 7 to participate in <MyLink href="https://www.blocktempo.com/taipei-ton-hackathon-registration-is-now-open/" target="_blank" rel="noreferrer">Taipei TON Hackathon</MyLink> and we got the 1st prize. There were around 50 applications in total, and 8 teams were selected to attend the on-site competition.</p>
-              </li>
-              <div className="h-4" />
-              <li>
-                <p>Genki, my startup, was selected as one of the teams in <MyLink href="https://appworks.tw/" target="_blank" rel="noreferrer">AppWorks Accelerator </MyLink>Batch #25.</p>
-              </li>
-            </ul>
-          </NamedSection>
-          <NamedSection name="CAREER" Icon={BriefcaseIcon}>
-            {PAGE.career.map((item, index) => (
-              <ul key={index}>
-                <li>
-                  <div>
-                    {item.position} <MyLink href={item.link} target="_blank" rel="noreferrer">{item.name}</MyLink>
-                  </div>
-                  {item.description && (
-                    <div className="text-zinc-400 text-base sm:text-lg">{item.description}</div>
-                  )}
-                </li>
-              </ul>
-            ))}
-          </NamedSection>
-          <NamedSection name="TALKS" Icon={LightBulbIcon}>
-            {PAGE.talks.map((item, index) => (
-              <ul key={index}>
-                <li>
-                  <div>
-                    {item.position} <MyLink href={item.link} target="_blank" rel="noreferrer">{item.name}</MyLink>
-                  </div>
-                  {item.description && (
-                    <div className="text-zinc-400 text-base sm:text-lg">{item.description}</div>
-                  )}
-                </li>
-              </ul>
-            ))}
-          </NamedSection>
-          <NamedSection name="PUBLICATIONS" Icon={BookOpenIcon}>
-            <ul>
-              {PAGE.publications.map((item, index) => (
-                <li key={index} className="text-base sm:text-lg">
-                  <span className="text-zinc-400">
-                    {item.authors.map((author, index) => (author === "Yu-Jing Lin" ? (
-                      <span key={index}>
-                        {index > 0 && <span>, </span>}
-                        <MyLink href="https://arxiv.org/search/cs?query=Lin%2C+Yu-Jing&searchtype=author">Yu-Jing Lin</MyLink>
-                      </span>
-                    ) : (
-                      <span key={index}>
-                        {index > 0 && <span>, </span>}
-                        <span>{author}</span>
-                      </span>
-                    )))
-                    }.&nbsp;
-                  </span>
-                  <span>{item.name}.&nbsp;</span>
-                  <span className="text-zinc-400">{item.description}&nbsp;</span>
-                  {item.link && (
-                    <MyLink href={item.link} target="_blank" rel="noreferrer">[arXiv]</MyLink>
-                  )}
-                </li>
-              ))}
-            </ul>
-          </NamedSection>
-          <NamedSection name="EDUCATION" Icon={AcademicCapIcon}>
-            {PAGE.education.map((item, index) => (
-              <ul key={index}>
-                <li>
-                  <div>
-                    {item.position} <MyLink href={item.link} target="_blank" rel="noreferrer">{item.name}</MyLink>
-                  </div>
-                  {item.description && (
-                    <div className="text-zinc-400 text-base sm:text-lg">{item.description}</div>
-                  )}
-                </li>
-              </ul>
-            ))}
-          </NamedSection>
+          <News />
+          <Career name="CAREER" Icon={BriefcaseIcon} items={PAGE.career} />
+          <Career name="TALKS" Icon={LightBulbIcon} items={PAGE.talks} />
+          <Publications />
+          <Career name="EDUCATION" Icon={AcademicCapIcon} items={PAGE.education} />
           <GithubStats />
         </div>
         <Footer />
