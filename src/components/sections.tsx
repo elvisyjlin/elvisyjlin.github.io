@@ -87,7 +87,7 @@ export const Hero: FC = () => {
             <p className="font-semibold">You don&apos;t need to know but...</p>
             <p>I am a KPOP fan, a dancer and a shutterbug.</p>
             <br />
-            <div className="text-base sm:text-lg mt-1 sm:mt-0 flex flex-wrap gap-1.5 sm:gap-2">
+            <div className="text-base sm:text-lg mt-1 sm:mt-0 flex flex-wrap gap-x-1.5 sm:gap-x-2">
               {
                 PAGE.skills
                   .map((item, index) => (
