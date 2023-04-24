@@ -80,8 +80,8 @@ export const Hero: FC = () => {
             </div>
             <br />
             <p className="font-semibold">About Me</p>
-            <p>I am the co-founder of Genki.</p>
-            <p>I was an NLP model engineer at Microsoft.</p>
+            <p>I am an NLP model engineer at Microsoft.</p>
+            <p>I was the co-founder of Genki.</p>
             <p>I love computer vision, natural language processing, and decentralization.</p>
             <br />
             <p className="font-semibold">You don&apos;t need to know but...</p>
@@ -150,10 +150,12 @@ export const News: FC = () => {
     <NamedSection name="NEWS" Icon={FireIcon}>
       <ul>
         <li>
-          <p>I led a team of 7 to participate in <MyLink href="https://www.blocktempo.com/taipei-ton-hackathon-registration-is-now-open/" target="_blank" rel="noreferrer">Taipei TON Hackathon</MyLink> and we got the 1st prize. There were around 50 applications in total, and 8 teams were selected to attend the on-site competition.</p>
+          <p>I led a team of 7 to participate in <MyLink href="https://dorahacks.io/hackathon/hack-a-tonx" target="_blank" rel="noreferrer">Hack-a-TONx w/ DoraHacks</MyLink>, a.k.a TON Hackathon, and we <b>got the top 10 ($5,000 award)</b> out of 233 builds. We are <MyLink href="https://dorahacks.io/buidl/4580" target="_blank" rel="noreferrer">1TON</MyLink>.</p>
         </li>
-        <div className="h-4" />
-        <li>
+        <li className="pt-4">
+          <p>We also <b>won the 1st prize</b> of <MyLink href="https://www.blocktempo.com/taipei-ton-hackathon-registration-is-now-open/" target="_blank" rel="noreferrer">Taipei TON Hackathon</MyLink>. There were around 50 applications in total, and 8 teams were selected to attend the on-site competition.</p>
+        </li>
+        <li className="pt-4">
           <p>Genki, my startup, was selected as one of the teams in <MyLink href="https://appworks.tw/" target="_blank" rel="noreferrer">AppWorks Accelerator </MyLink>Batch #25.</p>
         </li>
       </ul>

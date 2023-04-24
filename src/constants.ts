@@ -27,9 +27,15 @@ export const PAGE = {
   ],
   career: [
     {
+      name: "Microsoft",
+      position: "NLP Model Engineer at",
+      description: "Mar. 2023 - Current, Visual Document Intelligence. We build Azure Form Recognizer with OpenAI.",
+      link: "https://www.microsoft.com/",
+    },
+    {
       name: "Genki",
       position: "CTO / Co-Founder of",
-      description: "Jul. 2022 - Current, Web 3.0 Marketing Solutions",
+      description: "Jul. 2022 - Feb. 2023, Web 3.0 Marketing Solutions",
       link: "https://genki.io/",
     },
     {
