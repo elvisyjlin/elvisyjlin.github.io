@@ -68,7 +68,7 @@ export const Hero: FC = () => {
             md:text-6xl md:leading-[1.1] 
             xl:text-7xl xl:leading-[1.1]"
           >Hello, I am<br />Elvis</h1>
-          <div className="mt-6 sm:mt-10 ml-[2px] pb-60 sm:pb-0">
+          <div className="mt-6 sm:mt-10 ml-[2px] pb-60 sm:pb-0 text-base sm:text-lg">
             <div className="flex gap-4 items-center">
               <p className="font-semibold">aka Yu Jing Lin</p>
               <MyLink href="https://github.com/elvisyjlin" target="_blank" rel="noreferrer">
@@ -87,7 +87,7 @@ export const Hero: FC = () => {
             <p className="font-semibold">You don&apos;t need to know but...</p>
             <p>I am a KPOP fan, a dancer and a shutterbug.</p>
             <br />
-            <div className="text-base sm:text-lg mt-1 sm:mt-0 flex flex-wrap gap-x-1.5 sm:gap-x-2">
+            <div className="mt-1 sm:mt-0 flex flex-wrap gap-x-1.5 sm:gap-x-2">
               {
                 PAGE.skills
                   .map((item, index) => (
@@ -135,7 +135,7 @@ export const NamedSection: FC<NamedSectionProps> = ({ children, name, Icon }) =>
   return (
     <FadeInSection>
       <section className="sm:grid sm:grid-cols-12 mb-8 gap-8">
-        <div className="mb-8 sm:col-span-4 lg:col-span-3 3xl:col-span-2 flex gap-2.5 text-zinc-600">
+        <div className="mb-3 sm:mb-8 sm:col-span-4 lg:col-span-3 3xl:col-span-2 flex gap-2.5 text-zinc-600">
           <Icon className="h-5 mt-[2.5px]" />
           <h2 className="text-lg font-semibold">{name}</h2>
         </div>
@@ -148,14 +148,14 @@ export const NamedSection: FC<NamedSectionProps> = ({ children, name, Icon }) =>
 export const News: FC = () => {
   return (
     <NamedSection name="NEWS" Icon={FireIcon}>
-      <ul>
+      <ul className="text-base sm:text-lg">
         <li>
           <p>I led a team of 7 to participate in <MyLink href="https://dorahacks.io/hackathon/hack-a-tonx" target="_blank" rel="noreferrer">Hack-a-TONx w/ DoraHacks</MyLink>, a.k.a TON Hackathon, and we <b>got the top 10 ($5,000 award)</b> out of 233 builds. We are <MyLink href="https://dorahacks.io/buidl/4580" target="_blank" rel="noreferrer">1TON</MyLink>.</p>
         </li>
-        <li className="pt-4">
+        <li className="pt-1.5 sm:pt-4">
           <p>We also <b>won the 1st prize</b> of <MyLink href="https://www.blocktempo.com/taipei-ton-hackathon-registration-is-now-open/" target="_blank" rel="noreferrer">Taipei TON Hackathon</MyLink>. There were around 50 applications in total, and 8 teams were selected to attend the on-site competition.</p>
         </li>
-        <li className="pt-4">
+        <li className="pt-1.5 sm:pt-4">
           <p>Genki, my startup, was selected as one of the teams in <MyLink href="https://appworks.tw/" target="_blank" rel="noreferrer">AppWorks Accelerator </MyLink>Batch #25.</p>
         </li>
       </ul>
@@ -178,7 +178,7 @@ export const Career: FC<CareerProps> = ({ name, Icon, items }) => {
   return (
     <NamedSection name={name} Icon={Icon}>
       {items.map((item, index) => (
-        <ul key={index}>
+        <ul key={index} className="text-base sm:text-lg">
           <li>
             <div>
               {item.position} <MyLink href={item.link} target="_blank" rel="noreferrer">{item.name}</MyLink>
@@ -196,9 +196,9 @@ export const Career: FC<CareerProps> = ({ name, Icon, items }) => {
 export const Publications: FC = () => {
   return (
     <NamedSection name="PUBLICATIONS" Icon={BookOpenIcon}>
-      <ul>
+      <ul className="text-base sm:text-lg">
         {PAGE.publications.map((item, index) => (
-          <li key={index} className="text-base sm:text-lg">
+          <li key={index}>
             <span className="text-zinc-400">
               {item.authors.map((author, index) => (author === "Yu-Jing Lin" ? (
                 <span key={index}>
@@ -213,10 +213,14 @@ export const Publications: FC = () => {
               )))
               }.&nbsp;
             </span>
-            <span>{item.name}.&nbsp;</span>
-            <span className="text-zinc-400">{item.description}&nbsp;</span>
+            <span>{item.name}.</span>
+            <span className="text-zinc-400">&nbsp;{item.description}</span>
+            {item.citations && <span className="text-zinc-400">&nbsp;(Cited by {item.citations})</span>}
             {item.link && (
-              <MyLink href={item.link} target="_blank" rel="noreferrer">[arXiv]</MyLink>
+              <>
+                &nbsp;
+                <MyLink href={item.link} target="_blank" rel="noreferrer">[arXiv]</MyLink>
+              </>
             )}
           </li>
         ))}

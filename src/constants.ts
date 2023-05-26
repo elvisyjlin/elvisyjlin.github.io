@@ -89,6 +89,7 @@ export const PAGE = {
         "Edward Y. Chang",
         "Shih-wei Liao",
       ],
+      citations: 130,
     },
     {
       name: "An Evaluation of Bitcoin Address Classification based on Transaction History Summarization",
@@ -101,6 +102,7 @@ export const PAGE = {
         "I-Ping Tu",
         "Shih-wei Liao",
       ],
+      citations: 53,
     },
     {
       name: "Deep Reinforcement Learning for Playing 2.5D Fighting Games",
@@ -113,6 +115,7 @@ export const PAGE = {
         "Po-Wei Wu",
         "Yu-Chiang Frank Wang",
       ],
+      citations: 11,
     },
     {
       name: "Personalized Difficulty Adjustment for Countering the Double-Spending Attack in Proof-of-Work Consensus Protocols",
@@ -126,6 +129,7 @@ export const PAGE = {
         "I-Ping Tu",
         "Shih-wei Liao",
       ],
+      citations: 9,
     },
     {
       name: "Generating Anime Faces from Human Faces with Adversarial Networks",
