@@ -8,21 +8,21 @@ export const PAGE = {
       name: "TensorFlow",
       link: "https://www.tensorflow.org/",
     },
-    {
-      name: "Solidity",
-      link: "https://docs.soliditylang.org/",
-    },
-    {
-      name: "FunC",
-      link: "https://ton.org/docs/develop/func/overview",
-    },
-    {
-      name: "Tact",
-      link: "https://tact-lang.org/",
-    },
+    // {
+    //   name: "FunC",
+    //   link: "https://ton.org/docs/develop/func/overview",
+    // },
+    // {
+    //   name: "Tact",
+    //   link: "https://tact-lang.org/",
+    // },
     {
       name: "TypeScript",
       link: "https://www.typescriptlang.org/",
+    },
+    {
+      name: "Solidity",
+      link: "https://docs.soliditylang.org/",
     },
   ],
   career: [
@@ -89,7 +89,7 @@ export const PAGE = {
         "Edward Y. Chang",
         "Shih-wei Liao",
       ],
-      citations: 130,
+      citations: 142,
     },
     {
       name: "An Evaluation of Bitcoin Address Classification based on Transaction History Summarization",
@@ -102,7 +102,7 @@ export const PAGE = {
         "I-Ping Tu",
         "Shih-wei Liao",
       ],
-      citations: 53,
+      citations: 58,
     },
     {
       name: "Deep Reinforcement Learning for Playing 2.5D Fighting Games",
@@ -115,7 +115,7 @@ export const PAGE = {
         "Po-Wei Wu",
         "Yu-Chiang Frank Wang",
       ],
-      citations: 11,
+      citations: 12,
     },
     {
       name: "Personalized Difficulty Adjustment for Countering the Double-Spending Attack in Proof-of-Work Consensus Protocols",
