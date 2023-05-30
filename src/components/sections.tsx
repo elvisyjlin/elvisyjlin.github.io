@@ -149,7 +149,7 @@ export const News: FC = () => {
   return (
     <NamedSection name="NEWS" Icon={FireIcon}>
       <ul className="text-base sm:text-lg">
-        <li>I've been working on an <MyLink href="https://openai.com" target="_blank" rel="noreferrer">OpenAI</MyLink>-related project since I returned to <MyLink href="https://www.microsoft.com" target="_blank" rel="noreferrer">Microsoft</MyLink> in March.</li>
+        <li>I&apos;ve been working on an <MyLink href="https://openai.com" target="_blank" rel="noreferrer">OpenAI</MyLink>-related project since I returned to <MyLink href="https://www.microsoft.com" target="_blank" rel="noreferrer">Microsoft</MyLink> in March.</li>
         <li>
           <p>I led a team of 7 to participate in <MyLink href="https://dorahacks.io/hackathon/hack-a-tonx" target="_blank" rel="noreferrer">Hack-a-TONx w/ DoraHacks</MyLink>, a.k.a TON Hackathon, and we <b>got the top 10 ($5,000 award)</b> out of 233 builds. We are <MyLink href="https://dorahacks.io/buidl/4580" target="_blank" rel="noreferrer">1TON</MyLink>.</p>
         </li>
