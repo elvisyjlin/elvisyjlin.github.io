@@ -17,8 +17,20 @@ module.exports = {
       colors: {
         "photo-black": "#131313",
         "github-black": "#24292f",
-      }
+      },
+      typography: (theme) => ({
+        DEFAULT: {
+          css: {
+            color: "#131313",
+            light: {
+              color: theme("colors.zinc.400"),
+            },
+          },
+        },
+      }),
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/typography'),
+  ],
 }

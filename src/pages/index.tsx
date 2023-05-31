@@ -1,8 +1,6 @@
 import Head from "next/head";
 import Footer from "@/components/footer";
-import { Career, GithubStats, Hero, News, Publications } from "@/components/sections";
-import { PAGE } from "@/constants";
-import { AcademicCapIcon, BriefcaseIcon, LightBulbIcon } from "@heroicons/react/24/solid";
+import { GithubStats, Hero, Sections } from "@/components/sections";
 import { Source_Serif_Pro } from "@next/font/google";
 
 // const lexend = Lexend({ subsets: ["latin"], display: "swap" });
@@ -24,11 +22,7 @@ export default function Home() {
       <main style={sourceSerifPro.style} className="text-lg text-photo-black leading-snug sm:leading-normal">
         <Hero />
         <div className="min-h-screen mx-6 sm:mx-20 md:mx-32 xl:mx-40 my-12 sm:my-24 flex flex-col justify-center">
-          <News />
-          <Career name="CAREER" Icon={BriefcaseIcon} items={PAGE.career} />
-          <Career name="TALKS" Icon={LightBulbIcon} items={PAGE.talks} />
-          <Publications />
-          <Career name="EDUCATION" Icon={AcademicCapIcon} items={PAGE.education} />
+          <Sections />
           <GithubStats />
         </div>
         <Footer />

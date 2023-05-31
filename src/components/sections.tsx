@@ -1,15 +1,68 @@
 import { PAGE } from "@/constants";
-import { BookOpenIcon, FireIcon } from "@heroicons/react/24/solid";
+import { AcademicCapIcon, BookOpenIcon, BriefcaseIcon, FireIcon, LightBulbIcon } from "@heroicons/react/24/solid";
 import { Playfair_Display, Roboto } from "@next/font/google";
 import Image from "next/image";
-import { FC, ForwardRefExoticComponent, ReactNode, SVGProps, useEffect, useState } from "react";
+import { FC, ReactNode, SVGProps, useEffect, useState } from "react";
+import { ReactMarkdown } from "react-markdown/lib/react-markdown";
+import rehypeRaw from "rehype-raw";
 import { easeInOutExpo } from "./easingFn";
 import FadeInSection from "./fadein";
 import { GithubIcon, LinkedInIcon } from "./icons";
 import { MyLink, UnderlineLink } from "./links";
 
+import intro from "@/contents/intro.md";
+import news from "@/contents/news.md";
+import career from "@/contents/career.md";
+import talks from "@/contents/talks.md";
+import publications from "@/contents/publications.md";
+import education from "@/contents/education.md";
+
 const playfairDisplay = Playfair_Display({ subsets: ["latin"], display: "swap" });
 const roboto = Roboto({ weight: ["400", "500", "700"], subsets: ["latin"], display: "swap" });
+
+const sections = [
+  {
+    name: "NEWS",
+    icon: FireIcon,
+    content: news,
+  },
+  {
+    name: "CAREER",
+    icon: BriefcaseIcon,
+    content: career,
+  },
+  {
+    name: "TALKS",
+    icon: LightBulbIcon,
+    content: talks,
+  },
+  {
+    name: "PUBLICATIONS",
+    icon: BookOpenIcon,
+    content: publications,
+  },
+  {
+    name: "EDUCATION",
+    icon: AcademicCapIcon,
+    content: education,
+  }
+];
+
+type MyReactMarkdownProps = {
+  children: string;
+};
+
+export const MyReactMarkdown: FC<MyReactMarkdownProps> = ({ children }) => (
+  <ReactMarkdown
+    className="prose lg:prose-lg max-w-none
+    prose-p:mt-0 prose-p:mb-3 sm:prose-p:mb-4
+    prose-p:leading-6 sm:prose-p:leading-7
+    prose-strong:underline prose-strong:underline-offset-2 sm:prose-strong:underline-offset-[2.5px]
+    prose-a:text-orange-900 hover:prose-a:text-orange-600 prose-a:no-underline prose-a:transition prose-a:duration-300"
+    linkTarget="_blank"
+    rehypePlugins={[rehypeRaw]}
+  >{children}</ReactMarkdown>
+);
 
 export const Hero: FC = () => {
   const offsetBegin = 0;
@@ -79,13 +132,7 @@ export const Hero: FC = () => {
               </MyLink>
             </div>
             <br />
-            <p className="font-semibold">About Me</p>
-            <p>I am an NLP model engineer at Microsoft.</p>
-            <p>I was the co-founder of Genki.</p>
-            <p>I love computer vision, natural language processing, and decentralization.</p>
-            <br />
-            <p className="font-semibold">You don&apos;t need to know but...</p>
-            <p>I am a KPOP fan, a dancer and a shutterbug.</p>
+            <MyReactMarkdown>{intro}</MyReactMarkdown>
             <br />
             <div className="mt-1 sm:mt-0 flex flex-wrap gap-x-1.5 sm:gap-x-2">
               {
@@ -145,89 +192,16 @@ export const NamedSection: FC<NamedSectionProps> = ({ children, name, Icon }) =>
   );
 };
 
-export const News: FC = () => {
+export const Sections: FC = () => {
   return (
-    <NamedSection name="NEWS" Icon={FireIcon}>
-      <ul className="text-base sm:text-lg">
-        <li>I&apos;ve been working on an <MyLink href="https://openai.com" target="_blank" rel="noreferrer">OpenAI</MyLink>-related project since I returned to <MyLink href="https://www.microsoft.com" target="_blank" rel="noreferrer">Microsoft</MyLink> in March.</li>
-        <li>
-          <p>I led a team of 7 to participate in <MyLink href="https://dorahacks.io/hackathon/hack-a-tonx" target="_blank" rel="noreferrer">Hack-a-TONx w/ DoraHacks</MyLink>, a.k.a TON Hackathon, and we <b>got the top 10 ($5,000 award)</b> out of 233 builds. We are <MyLink href="https://dorahacks.io/buidl/4580" target="_blank" rel="noreferrer">1TON</MyLink>.</p>
-        </li>
-        <li className="pt-1.5 sm:pt-4">
-          <p>We also <b>won the 1st prize</b> of <MyLink href="https://www.blocktempo.com/taipei-ton-hackathon-registration-is-now-open/" target="_blank" rel="noreferrer">Taipei TON Hackathon</MyLink>. There were around 50 applications in total, and 8 teams were selected to attend the on-site competition.</p>
-        </li>
-        <li className="pt-1.5 sm:pt-4">
-          <p>Genki, my startup, was selected as one of the teams in <MyLink href="https://appworks.tw/" target="_blank" rel="noreferrer">AppWorks Accelerator </MyLink>Batch #25.</p>
-        </li>
-      </ul>
-    </NamedSection>
-  );
-};
-
-type CareerProps = {
-  name: string;
-  Icon: ForwardRefExoticComponent<SVGProps<SVGSVGElement>>;
-  items: {
-    name: string;
-    position: string;
-    description: string;
-    link: string;
-  }[];
-};
-
-export const Career: FC<CareerProps> = ({ name, Icon, items }) => {
-  return (
-    <NamedSection name={name} Icon={Icon}>
-      {items.map((item, index) => (
-        <ul key={index} className="text-base sm:text-lg">
-          <li>
-            <div>
-              {item.position} <MyLink href={item.link} target="_blank" rel="noreferrer">{item.name}</MyLink>
-            </div>
-            {item.description && (
-              <div className="text-zinc-400 text-base sm:text-lg">{item.description}</div>
-            )}
-          </li>
-        </ul>
-      ))}
-    </NamedSection>
-  );
-};
-
-export const Publications: FC = () => {
-  return (
-    <NamedSection name="PUBLICATIONS" Icon={BookOpenIcon}>
-      <ul className="text-base sm:text-lg">
-        {PAGE.publications.map((item, index) => (
-          <li key={index}>
-            <span className="text-zinc-400">
-              {item.authors.map((author, index) => (author === "Yu-Jing Lin" ? (
-                <span key={index}>
-                  {index > 0 && <span>, </span>}
-                  <MyLink href="https://arxiv.org/search/cs?query=Lin%2C+Yu-Jing&searchtype=author">Yu-Jing Lin</MyLink>
-                </span>
-              ) : (
-                <span key={index}>
-                  {index > 0 && <span>, </span>}
-                  <span>{author}</span>
-                </span>
-              )))
-              }.&nbsp;
-            </span>
-            <span>{item.name}.</span>
-            <span className="text-zinc-400">&nbsp;{item.description}</span>
-            {item.citations && <span className="text-zinc-400">&nbsp;(Cited by {item.citations})</span>}
-            {item.link && (
-              <>
-                &nbsp;
-                <MyLink href={item.link} target="_blank" rel="noreferrer">[arXiv]</MyLink>
-              </>
-            )}
-          </li>
-        ))}
-      </ul>
-    </NamedSection>
-  );
+    <>{
+      sections.map(({ name, icon, content }) => (
+        <NamedSection name={name} Icon={icon}>
+          <MyReactMarkdown>{content}</MyReactMarkdown>
+        </NamedSection>
+      ))
+    }</>
+  )
 };
 
 export const GithubStats: FC = () => {
