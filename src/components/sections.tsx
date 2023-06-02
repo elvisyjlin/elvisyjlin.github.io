@@ -1,3 +1,5 @@
+/* eslint-disable @next/next/no-img-element */
+
 import { PAGE } from "@/constants";
 import { AcademicCapIcon, BookOpenIcon, BriefcaseIcon, FireIcon, LightBulbIcon } from "@heroicons/react/24/solid";
 import { Playfair_Display, Roboto } from "@next/font/google";
@@ -217,7 +219,20 @@ export const GithubStats: FC = () => {
   return (
     <section className="flex flex-col items-center gap-4 sm:gap-6 my-12">
       <FadeInSection>
-        <Image
+        <img
+          src={
+            "https://github-readme-stats.vercel.app/api?" +
+            "username=elvisyjlin" +
+            "&count_private=true" +
+            "&theme=graywhite" +
+            "&show_icons=true" +
+            "&disable_animations=true" +
+            (screenWidth && screenWidth >= 640 ? "" : "&hide_rank=true")  // Hide rank if the window size is smaller than sm (640px)
+          }
+          alt="Github Stats of elvisyjlin"
+          loading="lazy"
+        />
+        {/* <Image
           src={
             "https://github-readme-stats.vercel.app/api?" +
             "username=elvisyjlin" +
@@ -233,19 +248,23 @@ export const GithubStats: FC = () => {
           height={221}
           alt="Github Stats of elvisyjlin"
           loading="lazy"
-        />
+        /> */}
       </FadeInSection>
       {/* Hide the Github contribution graph on small devices */}
       <FadeInSection className="hidden lg:block">
         <div className="p-6 border border-gray-200 rounded">
-          <Image
+          <img
+            src="https://ghchart.rshah.org/131313/elvisyjlin"
+            alt="Github Contributions of elvisyjlin"
+          />
+          {/* <Image
             src="https://ghchart.rshah.org/131313/elvisyjlin"
             alt="Github Contributions of elvisyjlin"
             // width={663}
             // height={104}
             width={730}
             height={114}
-          />
+          /> */}
         </div>
       </FadeInSection>
       <FadeInSection>
