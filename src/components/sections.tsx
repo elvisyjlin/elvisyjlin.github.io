@@ -10,6 +10,7 @@ import FadeInSection from "./fadein";
 import { GithubIcon, LinkedInIcon } from "./icons";
 import { MyLink, UnderlineLink } from "./links";
 
+import portraitPic from "../../public/portrait_2000w.webp";
 import intro from "@/contents/intro.md";
 import news from "@/contents/news.md";
 import career from "@/contents/career.md";
@@ -104,7 +105,7 @@ export const Hero: FC = () => {
         }
       }
     });
-  }, []);
+  });
 
   return (
     <section className="min-h-screen relative">
@@ -161,10 +162,9 @@ export const Hero: FC = () => {
         <Image
           priority
           id="portrait"
-          src="/portrait.webp"
+          src={portraitPic}
           alt="Portrait"
-          width={1359}
-          height={2000}
+          sizes="(max-width: 768px) 100vw, 50vw"
           className="absolute bottom-0 opacity-25 sm:opacity-100 pl-10 lg:pl-0 ml-0 lg:-ml-20 pr-4 sm:pr-10 object-contain max-h-screen"
         />
       </div>
@@ -196,7 +196,7 @@ export const Sections: FC = () => {
   return (
     <>{
       sections.map(({ name, icon, content }) => (
-        <NamedSection name={name} Icon={icon}>
+        <NamedSection key={name} name={name} Icon={icon}>
           <MyReactMarkdown>{content}</MyReactMarkdown>
         </NamedSection>
       ))
