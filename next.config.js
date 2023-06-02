@@ -1,4 +1,5 @@
 /** @type {import('next').NextConfig} */
+const withExportImages = require('next-export-optimize-images')
 const nextConfig = {
   // assetPrefix: ".",
   images: {
@@ -19,4 +20,4 @@ const nextConfig = {
   },
 }
 
-module.exports = nextConfig
+module.exports = withExportImages(nextConfig)
