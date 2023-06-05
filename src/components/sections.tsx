@@ -74,9 +74,11 @@ export const Hero: FC = () => {
   const offsetEnd = -120;
 
   useEffect(() => {
-    const portrait = document.getElementById("portrait");
-    if (portrait) {
-      portrait.style.opacity = minOpacity.toString();
+    if (window.innerWidth < 640) {
+      const portrait = document.getElementById("portrait");
+      if (portrait) {
+        portrait.style.opacity = minOpacity.toString();
+      }
     }
 
     function adjustOpacity() {
