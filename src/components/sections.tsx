@@ -23,6 +23,8 @@ import education from "@/contents/education.md";
 const playfairDisplay = Playfair_Display({ subsets: ["latin"], display: "swap" });
 const roboto = Roboto({ weight: ["400", "500", "700"], subsets: ["latin"], display: "swap" });
 
+const minOpacity = 0.1;
+
 const sections = [
   {
     name: "NEWS",
@@ -72,6 +74,11 @@ export const Hero: FC = () => {
   const offsetEnd = -120;
 
   useEffect(() => {
+    const portrait = document.getElementById("portrait");
+    if (portrait) {
+      portrait.style.opacity = minOpacity.toString();
+    }
+
     function adjustOpacity() {
       const content = document.getElementById("content");
       const portrait = document.getElementById("portrait");
@@ -83,7 +90,7 @@ export const Hero: FC = () => {
         const contentOpacity = (Math.round((1 - progress) * 100) / 100).toString();
         content.style.opacity = contentOpacity;
         // Calculate the opacity of portrait
-        const portraitOpacity = 0.25 + progress * 0.75;
+        const portraitOpacity = minOpacity + progress * (1 - minOpacity);
         portrait.style.opacity = (Math.round(portraitOpacity * 100) / 100).toString();
       }
     }
@@ -167,7 +174,7 @@ export const Hero: FC = () => {
           src={portraitPic}
           alt="Portrait"
           sizes="(max-width: 768px) 100vw, 50vw"
-          className="absolute bottom-0 opacity-25 sm:opacity-100 pl-10 lg:pl-0 ml-0 lg:-ml-20 pr-4 sm:pr-10 object-contain max-h-screen"
+          className="absolute bottom-0 opacity-0 sm:opacity-100 pl-10 lg:pl-0 ml-0 lg:-ml-20 pr-4 sm:pr-10 object-contain max-h-screen"
         />
       </div>
     </section>
