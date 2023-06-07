@@ -192,7 +192,7 @@ type NamedSectionProps = {
 export const NamedSection: FC<NamedSectionProps> = ({ children, name, Icon }) => {
   return (
     <FadeInSection>
-      <section className="sm:grid sm:grid-cols-12 mb-8 gap-8">
+      <section className="sm:grid sm:grid-cols-12 mb-8 gap-8 mx-auto max-w-[1200px]">
         <div className="mb-3 sm:mb-8 sm:col-span-4 lg:col-span-3 3xl:col-span-2 flex gap-2.5 text-zinc-600">
           <Icon className="h-5 mt-[2.5px]" />
           <h2 className="text-lg font-semibold">{name}</h2>
