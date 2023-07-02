@@ -53,6 +53,10 @@ const sections = [
   }
 ];
 
+const numberWithCommas = (x: number) => {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+};
+
 type MyReactMarkdownProps = {
   children: string;
 };
@@ -226,7 +230,7 @@ export const GithubStats: FC = () => {
   }, []);
 
   return (
-    <section className="flex flex-col items-center gap-4 sm:gap-6 my-12">
+    <section className="flex flex-col items-center gap-4 sm:gap-6 my-16">
       <FadeInSection>
         <img
           src={
@@ -287,4 +291,50 @@ export const GithubStats: FC = () => {
       </FadeInSection>
     </section>
   );
+};
+
+type YoutubeStatsProps = {
+  stats: any;
+};
+
+export const YoutubeStats: FC<YoutubeStatsProps> = ({ stats }) => {
+  console.log(stats);
+  const imgUrl = stats.playlists[0].snippet.thumbnails.standard.url;
+  const views: number[] = stats.videos.map((video: any) => parseInt(video.statistics.viewCount));
+  const totalViews = views.reduce((a, b) => a + b, 0);
+  const likes: number[] = stats.videos.map((video: any) => parseInt(video.statistics.likeCount));
+  const totalLikes = likes.reduce((a, b) => a + b, 0);
+  return (
+    <section className="flex flex-col items-center gap-4 sm:gap-6 my-16">
+      <FadeInSection className="w-full">
+        <div id="playlist-cover-wrapper">
+          <img
+            id="playlist-cover"
+            src={imgUrl}
+            alt="Playlist Cover"
+          />
+        </div>
+      </FadeInSection>
+      <FadeInSection>
+        <div className="text-center">
+          <span className="font-bold">{numberWithCommas(totalViews)}</span> views
+        </div>
+        <div className="text-center">
+          <span className="font-bold">{numberWithCommas(totalLikes)}</span> likes
+        </div>
+        <div className="text-center">
+          <span className="font-bold">{numberWithCommas(stats.videos.length)}</span> videos
+        </div>
+      </FadeInSection>
+      <FadeInSection>
+        <UnderlineLink
+          style={roboto.style}
+          className="sm:text-lg font-semibold scale-y-90 text-github-dark opacity-95"
+          href={stats.url}
+          target="_blank"
+          rel="noreferrer"
+        >Visit My YouTube Playlist</UnderlineLink>
+      </FadeInSection>
+    </section>
+  )
 };

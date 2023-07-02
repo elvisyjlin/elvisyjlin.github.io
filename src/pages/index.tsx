@@ -1,13 +1,24 @@
+import { GetStaticProps } from "next";
 import Head from "next/head";
 import Footer from "@/components/footer";
-import { GithubStats, Hero, Sections } from "@/components/sections";
+import { GithubStats, Hero, Sections, YoutubeStats } from "@/components/sections";
 import { Source_Serif_Pro } from "@next/font/google";
 
 // const lexend = Lexend({ subsets: ["latin"], display: "swap" });
 const sourceSerifPro = Source_Serif_Pro({ weight: ["200", "300", "400", "600", "700", "900"], subsets: ["latin"], display: "swap" });
 // const sourceSerif4 = Source_Serif_4({ weight: ["200", "300", "400", "600", "700", "900"], subsets: ["latin"], display: "swap" });
 
-export default function Home() {
+export const getStaticProps: GetStaticProps = async () => {
+  const playlistStats = await fetch("https://youtube-view-stats.vercel.app/api/playlist/PLvTriPFFaqSPz2DisctrVnLgO2qvJpJ7T").then((res) => res.json());
+  return {
+    props: {
+      playlistStats,
+    },
+    revalidate: 60 * 60 * 24,  // Revalidate every day
+  };
+};
+
+export default function Home({ playlistStats }: { playlistStats: any }) {
   return (
     <>
       <Head>
@@ -24,6 +35,7 @@ export default function Home() {
         <div className="min-h-screen mx-6 sm:mx-20 md:mx-32 xl:mx-40 my-12 sm:my-24 flex flex-col justify-center">
           <Sections />
           <GithubStats />
+          <YoutubeStats stats={playlistStats} />
         </div>
         <Footer />
 
