@@ -1,8 +1,9 @@
 import { GetStaticProps } from "next";
 import Head from "next/head";
 import Footer from "@/components/footer";
-import { GithubStats, Hero, Sections, YoutubeStats } from "@/components/sections";
+import { Hero, Sections } from "@/components/sections";
 import { Source_Serif_Pro } from "@next/font/google";
+import { GithubStats, YoutubeStats } from "@/components/stats";
 
 // const lexend = Lexend({ subsets: ["latin"], display: "swap" });
 const sourceSerifPro = Source_Serif_Pro({ weight: ["200", "300", "400", "600", "700", "900"], subsets: ["latin"], display: "swap" });

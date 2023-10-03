@@ -2,28 +2,24 @@
 
 import { PAGE } from "@/constants";
 import { AcademicCapIcon, BookOpenIcon, BriefcaseIcon, FireIcon, LightBulbIcon } from "@heroicons/react/24/solid";
-import { Playfair_Display, Roboto } from "@next/font/google";
+import { Playfair_Display } from "@next/font/google";
 import Image from "next/image";
-import { FC, ReactNode, SVGProps, useEffect, useState } from "react";
-import { ReactMarkdown } from "react-markdown/lib/react-markdown";
-import rehypeRaw from "rehype-raw";
+import { FC, ReactNode, SVGProps, useEffect } from "react";
 import { easeInOutExpo } from "./easingFn";
 import FadeInSection from "./fadein";
 import { GithubIcon, LinkedInIcon } from "./icons";
-import { MyLink, UnderlineLink } from "./links";
+import { MyLink } from "./links";
 
-import portraitPic from "../../public/portrait_2000w.webp";
 import intro from "@/contents/intro.md";
 import news from "@/contents/news.md";
 import career from "@/contents/career.md";
 import talks from "@/contents/talks.md";
 import publications from "@/contents/publications.md";
 import education from "@/contents/education.md";
+import MyReactMarkdown from "./markdown";
+import portraitPic from "../../public/portrait_2000w.webp";
 
 const playfairDisplay = Playfair_Display({ subsets: ["latin"], display: "swap" });
-const roboto = Roboto({ weight: ["400", "500", "700"], subsets: ["latin"], display: "swap" });
-
-const minOpacity = 0.1;
 
 const sections = [
   {
@@ -53,27 +49,8 @@ const sections = [
   }
 ];
 
-const numberWithCommas = (x: number) => {
-  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-};
-
-type MyReactMarkdownProps = {
-  children: string;
-};
-
-export const MyReactMarkdown: FC<MyReactMarkdownProps> = ({ children }) => (
-  <ReactMarkdown
-    className="prose lg:prose-lg max-w-none
-    prose-p:mt-0 prose-p:mb-3 sm:prose-p:mb-4
-    prose-p:leading-6 sm:prose-p:leading-7
-    prose-strong:underline prose-strong:underline-offset-2 sm:prose-strong:underline-offset-[2.5px]
-    prose-a:text-orange-900 hover:prose-a:text-orange-600 prose-a:no-underline prose-a:transition prose-a:duration-300"
-    linkTarget="_blank"
-    rehypePlugins={[rehypeRaw]}
-  >{children}</ReactMarkdown>
-);
-
 export const Hero: FC = () => {
+  const minOpacity = 0.1;
   const offsetBegin = 0;
   const offsetEnd = -120;
 
@@ -216,124 +193,5 @@ export const Sections: FC = () => {
         </NamedSection>
       ))
     }</>
-  )
-};
-
-export const GithubStats: FC = () => {
-  const [screenWidth, setScreenWidth] = useState<number>();
-
-  useEffect(() => {
-    setScreenWidth(window.innerWidth);
-    window.addEventListener("resize", (e) => {
-      setScreenWidth(window.innerWidth);
-    });
-  }, []);
-
-  return (
-    <section className="flex flex-col items-center gap-4 sm:gap-6 my-16">
-      <FadeInSection>
-        <img
-          src={
-            "https://github-readme-stats.vercel.app/api?" +
-            "username=elvisyjlin" +
-            "&count_private=true" +
-            "&theme=graywhite" +
-            "&show_icons=true" +
-            "&disable_animations=true" +
-            (screenWidth && screenWidth >= 640 ? "" : "&hide_rank=true")  // Hide rank if the window size is smaller than sm (640px)
-          }
-          alt="Github Stats of elvisyjlin"
-          loading="lazy"
-        />
-        {/* <Image
-          src={
-            "https://github-readme-stats.vercel.app/api?" +
-            "username=elvisyjlin" +
-            "&count_private=true" +
-            "&theme=graywhite" +
-            "&show_icons=true" +
-            "&disable_animations=true" +
-            (screenWidth && screenWidth >= 640 ? "" : "&hide_rank=true")  // Hide rank if the window size is smaller than sm (640px)
-          }
-          // width={450}
-          // height={195}
-          width={510}
-          height={221}
-          alt="Github Stats of elvisyjlin"
-          loading="lazy"
-        /> */}
-      </FadeInSection>
-      {/* Hide the Github contribution graph on small devices */}
-      <FadeInSection className="hidden lg:block">
-        <div className="p-6 border border-gray-200 rounded">
-          <img
-            src="https://ghchart.rshah.org/131313/elvisyjlin"
-            alt="Github Contributions of elvisyjlin"
-          />
-          {/* <Image
-            src="https://ghchart.rshah.org/131313/elvisyjlin"
-            alt="Github Contributions of elvisyjlin"
-            // width={663}
-            // height={104}
-            width={730}
-            height={114}
-          /> */}
-        </div>
-      </FadeInSection>
-      <FadeInSection>
-        <UnderlineLink
-          style={roboto.style}
-          className="sm:text-lg font-semibold scale-y-90 text-github-dark opacity-95"
-          href="https://github.com/elvisyjlin"
-          target="_blank"
-          rel="noreferrer"
-        >Visit My GitHub</UnderlineLink>
-      </FadeInSection>
-    </section>
-  );
-};
-
-type YoutubeStatsProps = {
-  stats: any;
-};
-
-export const YoutubeStats: FC<YoutubeStatsProps> = ({ stats }) => {
-  const imgUrl = stats.playlists[0].snippet.thumbnails.standard.url;
-  const views: number[] = stats.videos.map((video: any) => parseInt(video.statistics.viewCount));
-  const totalViews = views.reduce((a, b) => a + b, 0);
-  const likes: number[] = stats.videos.map((video: any) => parseInt(video.statistics.likeCount));
-  const totalLikes = likes.reduce((a, b) => a + b, 0);
-  return (
-    <section className="flex flex-col items-center gap-4 sm:gap-6 my-16">
-      <FadeInSection className="w-full">
-        <div id="playlist-cover-wrapper">
-          <img
-            id="playlist-cover"
-            src={imgUrl}
-            alt="Playlist Cover"
-          />
-        </div>
-      </FadeInSection>
-      <FadeInSection>
-        <div className="text-center">
-          <span className="font-bold">{numberWithCommas(totalViews)}</span> views
-        </div>
-        <div className="text-center">
-          <span className="font-bold">{numberWithCommas(totalLikes)}</span> likes
-        </div>
-        <div className="text-center">
-          <span className="font-bold">{numberWithCommas(stats.videos.length)}</span> videos
-        </div>
-      </FadeInSection>
-      <FadeInSection>
-        <UnderlineLink
-          style={roboto.style}
-          className="sm:text-lg font-semibold scale-y-90 text-github-dark opacity-95"
-          href={stats.url}
-          target="_blank"
-          rel="noreferrer"
-        >Visit My YouTube Playlist</UnderlineLink>
-      </FadeInSection>
-    </section>
   )
 };
