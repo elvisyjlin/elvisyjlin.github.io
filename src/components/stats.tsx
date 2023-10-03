@@ -86,6 +86,46 @@ export const GithubStats: FC = () => {
   );
 };
 
+type ArrowProps = {
+  className?: string;
+  style?: any;
+  onClick?: (event: any) => void;
+};
+
+const NextArrow: FC<ArrowProps> = ({ className, style, onClick }) => {
+  return (
+    <div className={className} style={{...style}} onClick={onClick}>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        strokeWidth={1.5}
+        stroke="currentColor"
+        className="w-6 h-6 text-[#131313] hover:opacity-50 absolute -top-0.5 -left-1"
+      >
+        <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+      </svg>
+    </div>
+  );
+};
+
+const PrevArrow: FC<ArrowProps> = ({ className, style, onClick }) => {
+  return (
+    <div className={className} style={{...style}} onClick={onClick}>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        strokeWidth={1.5}
+        stroke="currentColor"
+        className="w-6 h-6 text-[#131313] hover:opacity-50 absolute -top-0.5 left-0"
+      >
+        <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+      </svg>
+    </div>
+  );
+};
+
 type YoutubeStatsProps = {
   stats: any;
 };
@@ -107,6 +147,8 @@ export const YoutubeStats: FC<YoutubeStatsProps> = ({ stats }) => {
           autoplaySpeed={6000}
           centerPadding="0px"
           dotsClass="custom-slick-dots"
+          nextArrow={<NextArrow />}
+          prevArrow={<PrevArrow />}
         >
           {stats.videos.slice(0, 5).map((video: any, index: number) => (
             <Link href={`https://youtu.be/${video.id}`} target="_blank" key={index}>
