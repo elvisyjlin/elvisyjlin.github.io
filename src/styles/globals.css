@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Disable horizontal scroll */
+
+html, body {
+  overflow-x: hidden;
+}
+
+body {
+  position: relative
+}
+
 li {
   margin-bottom: .5em;
 }
@@ -41,6 +51,7 @@ b {
 .custom-slick-dots
 {
     position: absolute;
+    left: -0.25rem;
     bottom: -1.25rem;
 
     display: block;

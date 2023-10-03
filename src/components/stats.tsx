@@ -94,7 +94,7 @@ type ArrowProps = {
 
 const NextArrow: FC<ArrowProps> = ({ className, style, onClick }) => {
   return (
-    <div className={className} style={{...style}} onClick={onClick}>
+    <div className={`${className} invisible sm:visible`} style={{...style}} onClick={onClick}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
@@ -111,7 +111,7 @@ const NextArrow: FC<ArrowProps> = ({ className, style, onClick }) => {
 
 const PrevArrow: FC<ArrowProps> = ({ className, style, onClick }) => {
   return (
-    <div className={className} style={{...style}} onClick={onClick}>
+    <div className={`${className} invisible sm:visible`} style={{...style}} onClick={onClick}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
