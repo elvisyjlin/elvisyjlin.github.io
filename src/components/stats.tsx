@@ -70,7 +70,7 @@ export const GithubStats: FC = () => {
       <FadeInSection>
         <UnderlineLink
           style={roboto.style}
-          className="sm:text-lg font-semibold scale-y-90 text-github-dark opacity-95"
+          className="sm:text-lg font-medium scale-y-90 text-github-dark opacity-95"
           href="https://github.com/elvisyjlin"
           target="_blank"
           rel="noreferrer"
@@ -94,6 +94,9 @@ export const YoutubeStats: FC<YoutubeStatsProps> = ({ stats }) => {
   return (
     <section className="flex flex-col items-center gap-4 sm:gap-6 my-16">
       <FadeInSection className="w-full">
+        <h2 className="text-lg font-semibold text-center word-space-wide">DANCE VIDEOS</h2>
+      </FadeInSection>
+      <FadeInSection className="w-full">
         <div id="playlist-cover-wrapper">
           <img
             id="playlist-cover"
@@ -103,20 +106,20 @@ export const YoutubeStats: FC<YoutubeStatsProps> = ({ stats }) => {
         </div>
       </FadeInSection>
       <FadeInSection>
-        <div className="text-center">
-          <span className="font-bold">{numberWithCommas(totalViews)}</span> views
+        <div className="text-center word-space-wide">
+          <span className="font-semibold">{numberWithCommas(totalViews)}</span> views
         </div>
-        <div className="text-center">
-          <span className="font-bold">{numberWithCommas(totalLikes)}</span> likes
+        <div className="text-center word-space-wide">
+          <span className="font-semibold">{numberWithCommas(totalLikes)}</span> likes
         </div>
-        <div className="text-center">
-          <span className="font-bold">{numberWithCommas(stats.videos.length)}</span> videos
+        <div className="text-center word-space-wide">
+          <span className="font-semibold">{numberWithCommas(stats.videos.length)}</span> videos
         </div>
       </FadeInSection>
       <FadeInSection>
         <UnderlineLink
           style={roboto.style}
-          className="sm:text-lg font-semibold scale-y-90 text-github-dark opacity-95"
+          className="sm:text-lg font-medium scale-y-90 text-github-dark opacity-95"
           href={stats.url}
           target="_blank"
           rel="noreferrer"
