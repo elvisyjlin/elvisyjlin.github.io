@@ -298,7 +298,6 @@ type YoutubeStatsProps = {
 };
 
 export const YoutubeStats: FC<YoutubeStatsProps> = ({ stats }) => {
-  console.log(stats);
   const imgUrl = stats.playlists[0].snippet.thumbnails.standard.url;
   const views: number[] = stats.videos.map((video: any) => parseInt(video.statistics.viewCount));
   const totalViews = views.reduce((a, b) => a + b, 0);
