@@ -1,8 +1,14 @@
 import { Roboto } from "@next/font/google";
 import { numberWithCommas } from "@/utils";
+import Link from "next/link";
+import Image from "next/image";
 import { FC, useEffect, useState } from "react";
+import Slider from "react-slick";
 import { UnderlineLink } from "./links";
 import FadeInSection from "./fadein";
+
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const roboto = Roboto({ weight: ["400", "500", "700"], subsets: ["latin"], display: "swap" });
 
@@ -85,8 +91,6 @@ type YoutubeStatsProps = {
 };
 
 export const YoutubeStats: FC<YoutubeStatsProps> = ({ stats }) => {
-  console.log(stats);
-  const imgUrl = stats.playlists[0].snippet.thumbnails.standard.url;
   const views: number[] = stats.videos.map((video: any) => parseInt(video.statistics.viewCount));
   const totalViews = views.reduce((a, b) => a + b, 0);
   const likes: number[] = stats.videos.map((video: any) => parseInt(video.statistics.likeCount));
@@ -96,14 +100,28 @@ export const YoutubeStats: FC<YoutubeStatsProps> = ({ stats }) => {
       <FadeInSection className="w-full">
         <h2 className="text-lg font-semibold text-center word-space-wide">DANCE VIDEOS</h2>
       </FadeInSection>
-      <FadeInSection className="w-full">
-        <div id="playlist-cover-wrapper">
-          <img
-            id="playlist-cover"
-            src={imgUrl}
-            alt="Playlist Cover"
-          />
-        </div>
+      <FadeInSection className="w-full sm:w-[507px] pb-3 sm:pb-1">
+        <Slider
+          dots
+          autoplay
+          autoplaySpeed={6000}
+          centerPadding="0px"
+          dotsClass="custom-slick-dots"
+        >
+          {stats.videos.slice(0, 5).map((video: any, index: number) => (
+            <Link href={`https://youtu.be/${video.id}`} target="_blank" key={index}>
+            <div id="playlist-cover-wrapper">
+              <Image
+                id="playlist-cover"
+                src={video.snippet.thumbnails.standard.url}
+                alt="Playlist Cover"
+                width={320}
+                height={180}
+              />
+            </div>
+            </Link>
+          ))}
+        </Slider>
       </FadeInSection>
       <FadeInSection>
         <div className="text-center word-space-wide">
