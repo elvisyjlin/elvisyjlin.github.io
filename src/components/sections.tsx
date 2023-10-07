@@ -1,9 +1,17 @@
 /* eslint-disable @next/next/no-img-element */
 
 import { PAGE } from "@/constants";
-import { AcademicCapIcon, BookOpenIcon, BriefcaseIcon, FireIcon, LightBulbIcon } from "@heroicons/react/24/solid";
+import {
+  AcademicCapIcon,
+  BookOpenIcon,
+  BriefcaseIcon,
+  FireIcon,
+  LightBulbIcon,
+  RocketLaunchIcon,
+} from "@heroicons/react/24/solid";
 import { Playfair_Display } from "@next/font/google";
 import Image from "next/image";
+import Link from "next/link";
 import { FC, ReactNode, SVGProps, useEffect, useRef, useState } from "react";
 import { easeInOutExpo } from "./easingFn";
 import FadeInSection from "./fadein";
@@ -21,32 +29,57 @@ import portraitPic from "../../public/portrait_2000w.webp";
 
 const playfairDisplay = Playfair_Display({ subsets: ["latin"], display: "swap" });
 
+enum SectionType {
+  Markdown,
+  Gallery,
+};
+
 const sections = [
   {
     name: "NEWS",
     icon: FireIcon,
+    type: SectionType.Markdown,
     content: news,
     collapsable: true,
     minElements: 2,
   },
   {
+    name: "PROJECTS",
+    icon: RocketLaunchIcon,
+    type: SectionType.Gallery,
+    content: [
+      {
+        name: "Produce 101 Ranker",
+        img: {
+          src: "https://raw.githubusercontent.com/produce101jpthegirls/produce101jpthegirls.github.io/bc4c4db5597a2b58f628154cca44a47eb84935a2/public/assets/example.png",
+          alt: "Produce 101 Ranker",
+        },
+        href: "https://github.com/produce101jpthegirls/produce101jpthegirls.github.io",
+      },
+    ],
+  },
+  {
     name: "CAREER",
     icon: BriefcaseIcon,
+    type: SectionType.Markdown,
     content: career,
   },
   {
     name: "TALKS",
     icon: LightBulbIcon,
+    type: SectionType.Markdown,
     content: talks,
   },
   {
     name: "PUBLICATIONS",
     icon: BookOpenIcon,
+    type: SectionType.Markdown,
     content: publications,
   },
   {
     name: "EDUCATION",
     icon: AcademicCapIcon,
+    type: SectionType.Markdown,
     content: education,
   }
 ];
@@ -159,7 +192,8 @@ export const Hero: FC = () => {
           src={portraitPic}
           alt="Portrait"
           sizes="(max-width: 768px) 100vw, 50vw"
-          className="absolute bottom-0 opacity-0 sm:opacity-100 pl-10 lg:pl-0 ml-0 lg:-ml-20 pr-4 sm:pr-10 object-contain max-h-screen"
+          className="absolute bottom-0 opacity-0 sm:opacity-100 pl-10 lg:pl-0 ml-0 lg:-ml-20 pr-4 sm:pr-10 
+          object-contain max-h-screen"
         />
       </div>
     </section>
@@ -242,8 +276,13 @@ export const NamedSection: FC<NamedSectionProps> = ({
         </section>
         {collapsable && (
           <div className="flex justify-start sm:justify-center text-sm sm:text-base">
-            <button onClick={() => setCollapsed(!collapsed)} className="flex items-center gap-1 text-[#52525b] hover:text-[#a1a1aa] transition-color duration-300">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className={`w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-700 ease-in ${collapsed ? "rotate-0" : "-rotate-180"}`}>
+            <button
+              onClick={() => setCollapsed(!collapsed)}
+              className="flex items-center gap-1 text-[#a1a1aa] hover:text-amber-600 transition-color duration-300"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className={
+                `w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-700 ease-in ${collapsed ? "rotate-0" : "-rotate-180"}`
+              }>
                 <path fillRule="evenodd" d="M12.53 16.28a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 011.06-1.06L12 14.69l6.97-6.97a.75.75 0 111.06 1.06l-7.5 7.5z" clipRule="evenodd" />
               </svg>
               <span className="w-[128px] text-left">{collapsed ? "Tap to Read More" : "Tap to Hide"}</span>
@@ -255,10 +294,36 @@ export const NamedSection: FC<NamedSectionProps> = ({
   );
 };
 
+const createSectionContent = (type: SectionType, content: any) => {
+  if (type === SectionType.Markdown) {
+    return <MyReactMarkdown>{content}</MyReactMarkdown>;
+  }
+  if (type === SectionType.Gallery) {
+    return (
+      <div
+        className="sm:grid lg:grid-cols-2"
+      >{content.map((item: any, index: number) => (
+        <Link key={index} className="flex flex-col gap-2 items-center group" href={item.href} target="_blank">
+          <img
+            className="border border-[#131313] group-hover:border-amber-600 
+            rounded overflow-hidden transition-color duration-300"
+            src={item.img.src}
+            alt={item.img.alt}
+          />
+          <div className="text-sm sm:text-base text-[#131313] group-hover:text-amber-600 
+          transition-color duration-300">{item.name}</div>
+        </Link>
+      ))
+      }</div>
+    );
+  }
+  throw Error(`Unsupported section type: ${type}`);
+};
+
 export const Sections: FC = () => {
   return (
     <>{
-      sections.map(({ name, icon, content, collapsable, minElements }) => (
+      sections.map(({ name, icon, type, content, collapsable, minElements }) => (
         <NamedSection
           key={name}
           name={name}
@@ -266,7 +331,7 @@ export const Sections: FC = () => {
           collapsable={collapsable}
           minElements={minElements}
         >
-          <MyReactMarkdown>{content}</MyReactMarkdown>
+          {createSectionContent(type, content)}
         </NamedSection>
       ))
     }</>
