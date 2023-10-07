@@ -23,7 +23,7 @@ export const GithubStats: FC = () => {
   }, []);
 
   return (
-    <section className="flex flex-col items-center gap-4 sm:gap-6 my-16">
+    <section className="flex flex-col justify-center items-center gap-4 sm:gap-6 h-[80vh]">
       <FadeInSection>
         <img
           src={
@@ -136,7 +136,7 @@ export const YoutubeStats: FC<YoutubeStatsProps> = ({ stats }) => {
   const likes: number[] = stats.videos.map((video: any) => parseInt(video.statistics.likeCount));
   const totalLikes = likes.reduce((a, b) => a + b, 0);
   return (
-    <section className="flex flex-col items-center gap-4 sm:gap-6 my-16">
+    <section className="flex flex-col justify-center items-center gap-4 sm:gap-6 h-[80vh]">
       <FadeInSection className="w-full">
         <h2 className="text-lg font-semibold text-center word-space-wide">DANCE VIDEOS</h2>
       </FadeInSection>
@@ -166,15 +166,22 @@ export const YoutubeStats: FC<YoutubeStatsProps> = ({ stats }) => {
         </Slider>
       </FadeInSection>
       <FadeInSection>
-        <div className="text-center word-space-wide">
-          <span className="font-semibold">{numberWithCommas(totalViews)}</span> views
-        </div>
-        <div className="text-center word-space-wide">
-          <span className="font-semibold">{numberWithCommas(totalLikes)}</span> likes
-        </div>
-        <div className="text-center word-space-wide">
-          <span className="font-semibold">{numberWithCommas(stats.videos.length)}</span> videos
-        </div>
+        <table className="table-auto">
+          <tbody>
+            <tr>
+              <td className="font-semibold text-right pr-2">{numberWithCommas(totalViews)}</td>
+              <td className="text-left">total views</td>
+            </tr>
+            <tr>
+              <td className="font-semibold text-right pr-2">{numberWithCommas(totalLikes)}</td>
+              <td className="text-left">total likes</td>
+            </tr>
+            <tr>
+              <td className="font-semibold text-right pr-2">{numberWithCommas(stats.videos.length)}</td>
+              <td className="text-left">videos</td>
+            </tr>
+          </tbody>
+        </table>
       </FadeInSection>
       <FadeInSection>
         <UnderlineLink
