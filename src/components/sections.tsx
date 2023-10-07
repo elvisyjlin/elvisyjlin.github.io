@@ -202,6 +202,48 @@ export const Hero: FC = () => {
   );
 };
 
+export const HeroPreview: FC = () => {
+  return (
+    <section className="min-h-screen relative">
+      <div
+        id="content"
+        className="absolute sm:right-1/2 inset-y-0 z-10 flex flex-col sm:justify-center 
+        sm:bg-none w-screen sm:w-fit"
+      >
+        <div className="pl-6 sm:pl-20 md:pl-32 xl:pl-40 pr-6 sm:pr-0 py-12 mr-0 md:-mr-18 xl:-mr-24">
+          <h1
+            style={playfairDisplay.style}
+            className="scale-y-95 tracking-[.015em] font-bold 
+            text-4xl sm:text-5xl sm:leading-[1.1] 
+            md:text-6xl md:leading-[1.1] 
+            xl:text-7xl xl:leading-[1.1]"
+          >Hello, I am<br />Elvis</h1>
+          <div className="mt-6 sm:mt-10 ml-[2px] pb-60 sm:pb-0 text-lg sm:text-xl">
+            <div className="flex gap-4 items-center">
+              <p className="font-semibold">aka Yujing Lin</p>
+                <GithubIcon className="-mt-[3px] h-6 w-6 fill-current" />
+                <LinkedInIcon className="-mt-[3px] h-6 w-6 fill-current" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="absolute w-screen sm:w-3/4 sm:left-1/4 md:w-2/3 md:left-1/3 lg:w-1/2 lg:left-1/2 inset-y-0"
+      >
+        <Image
+          priority
+          id="portrait"
+          src={portraitPic}
+          alt="Portrait"
+          sizes="(max-width: 768px) 100vw, 50vw"
+          className="absolute bottom-0 opacity-0 sm:opacity-100 pl-10 lg:pl-0 ml-0 lg:-ml-20 pr-4 sm:pr-10 
+          object-contain max-h-screen"
+        />
+      </div>
+    </section>
+  );
+};
+
 type NamedSectionProps = {
   children?: ReactNode[] | ReactNode | string;
   name: string;
