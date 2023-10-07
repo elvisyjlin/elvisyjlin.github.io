@@ -12,7 +12,7 @@ import {
 import { Playfair_Display } from "@next/font/google";
 import Image from "next/image";
 import Link from "next/link";
-import { FC, ReactNode, SVGProps, useEffect, useRef, useState } from "react";
+import { FC, ReactNode, SVGProps, useCallback, useEffect, useRef, useState } from "react";
 import { easeInOutExpo } from "./easingFn";
 import FadeInSection from "./fadein";
 import { GithubIcon, LinkedInIcon } from "./icons";
@@ -220,7 +220,7 @@ export const NamedSection: FC<NamedSectionProps> = ({
   const [maxHeight, setMaxHeight] = useState<number>();
   const ref = useRef<HTMLDivElement>(null);
 
-  function calcCollapseHeights() {
+  const calcCollapseHeights = useCallback(() => {
     if (minElements && ref.current && ref.current.firstChild) {
       const childNodes = Array.from(ref.current.firstChild.childNodes as NodeListOf<HTMLParagraphElement>);
       let i = 0;
@@ -244,14 +244,15 @@ export const NamedSection: FC<NamedSectionProps> = ({
       setMinHeight(minHeight);
       setMaxHeight(maxHeight);
     }
-  };
+  }, [minElements, setMinHeight, setMaxHeight]);
 
   useEffect(() => {
     if (collapsable && minElements) {
       calcCollapseHeights();
       window.addEventListener("resize", calcCollapseHeights);
+      return () => window.removeEventListener("resize", calcCollapseHeights);
     }
-  }, []);
+  }, [collapsable, minElements, calcCollapseHeights]);
 
   useEffect(() => {
     if (collapsable && !collapsed && maxHeight && ref.current) {
@@ -259,7 +260,7 @@ export const NamedSection: FC<NamedSectionProps> = ({
     } else if (collapsable && collapsed && minHeight && ref.current) {
       ref.current.style.height = minHeight + "px";
     }
-  }, [collapsed, maxHeight, minHeight, ref.current]);
+  }, [collapsable, collapsed, maxHeight, minHeight]);
 
   return (
     <FadeInSection>
