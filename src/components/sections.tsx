@@ -27,7 +27,7 @@ const sections = [
     icon: FireIcon,
     content: news,
     collapsable: true,
-    minElements: 3,
+    minElements: 2,
   },
   {
     name: "CAREER",
@@ -241,9 +241,9 @@ export const NamedSection: FC<NamedSectionProps> = ({
           >{children}</div>
         </section>
         {collapsable && (
-          <div className="flex justify-start sm:justify-center text-[#a1a1aa] text-sm sm:text-base">
-            <button onClick={() => setCollapsed(!collapsed)} className="flex items-center gap-1">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className={`w-4 h-4 sm:w-5 sm:h-5 transition duration-700 ease-in ${collapsed ? "rotate-0" : "-rotate-180"}`}>
+          <div className="flex justify-start sm:justify-center text-sm sm:text-base">
+            <button onClick={() => setCollapsed(!collapsed)} className="flex items-center gap-1 text-[#52525b] hover:text-[#a1a1aa] transition-color duration-300">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className={`w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-700 ease-in ${collapsed ? "rotate-0" : "-rotate-180"}`}>
                 <path fillRule="evenodd" d="M12.53 16.28a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 011.06-1.06L12 14.69l6.97-6.97a.75.75 0 111.06 1.06l-7.5 7.5z" clipRule="evenodd" />
               </svg>
               <span className="w-[128px] text-left">{collapsed ? "Tap to Read More" : "Tap to Hide"}</span>
