@@ -186,7 +186,7 @@ export const NamedSection: FC<NamedSectionProps> = ({
   const [maxHeight, setMaxHeight] = useState<number>();
   const ref = useRef<HTMLDivElement>(null);
 
-  function calculate() {
+  function calcCollapseHeights() {
     if (minElements && ref.current && ref.current.firstChild) {
       const childNodes = Array.from(ref.current.firstChild.childNodes as NodeListOf<HTMLParagraphElement>);
       let i = 0;
@@ -214,8 +214,8 @@ export const NamedSection: FC<NamedSectionProps> = ({
 
   useEffect(() => {
     if (collapsable && minElements) {
-      calculate();
-      window.addEventListener("resize", calculate);
+      calcCollapseHeights();
+      window.addEventListener("resize", calcCollapseHeights);
     }
   }, []);
 
@@ -236,29 +236,20 @@ export const NamedSection: FC<NamedSectionProps> = ({
             <h2 className="text-lg font-semibold">{name}</h2>
           </div>
           <div
-            className="sm:col-span-8 lg:col-span-9 3xl:col-span-10 overflow-hidden transition-all duration-500"
+            className="sm:col-span-8 lg:col-span-9 3xl:col-span-10 overflow-hidden transition-all duration-700 ease-in"
             ref={ref}
           >{children}</div>
         </section>
-        {collapsable && (collapsed ? (
-          <div className="flex justify-center text-[#a1a1aa] text-sm sm:text-base">
-            <button onClick={() => setCollapsed(false)} className="flex items-center gap-1">
-              <span>More</span>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
+        {collapsable && (
+          <div className="flex justify-start sm:justify-center text-[#a1a1aa] text-sm sm:text-base">
+            <button onClick={() => setCollapsed(!collapsed)} className="flex items-center gap-1">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className={`w-4 h-4 sm:w-5 sm:h-5 transition duration-700 ease-in ${collapsed ? "rotate-0" : "-rotate-180"}`}>
                 <path fillRule="evenodd" d="M12.53 16.28a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 011.06-1.06L12 14.69l6.97-6.97a.75.75 0 111.06 1.06l-7.5 7.5z" clipRule="evenodd" />
               </svg>
+              <span className="w-[128px] text-left">{collapsed ? "Tap to Read More" : "Tap to Hide"}</span>
             </button>
           </div>
-        ) : (
-          <div className="flex justify-center text-[#a1a1aa] text-sm sm:text-base">
-            <button onClick={() => setCollapsed(true)} className="flex items-center gap-1">
-              <span>Collpase</span>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
-                <path fillRule="evenodd" d="M11.47 7.72a.75.75 0 011.06 0l7.5 7.5a.75.75 0 11-1.06 1.06L12 9.31l-6.97 6.97a.75.75 0 01-1.06-1.06l7.5-7.5z" clipRule="evenodd" />
-              </svg>
-            </button>
-          </div>
-        ))}
+        )}
       </div>
     </FadeInSection>
   );
