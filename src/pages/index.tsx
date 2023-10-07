@@ -4,13 +4,14 @@ import Footer from "@/components/footer";
 import { Hero, Sections } from "@/components/sections";
 import { Source_Serif_Pro } from "@next/font/google";
 import { GithubStats, YoutubeStats } from "@/components/stats";
+import { fetchMyPlaylistStats } from "@/core";
 
 // const lexend = Lexend({ subsets: ["latin"], display: "swap" });
 const sourceSerifPro = Source_Serif_Pro({ weight: ["200", "300", "400", "600", "700", "900"], subsets: ["latin"], display: "swap" });
 // const sourceSerif4 = Source_Serif_4({ weight: ["200", "300", "400", "600", "700", "900"], subsets: ["latin"], display: "swap" });
 
 export const getStaticProps: GetStaticProps = async () => {
-  const playlistStats = await fetch("https://youtube-view-stats.vercel.app/api/playlist/PLvTriPFFaqSPz2DisctrVnLgO2qvJpJ7T").then((res) => res.json());
+  const playlistStats = await fetchMyPlaylistStats();
   return {
     props: {
       playlistStats,
@@ -36,7 +37,7 @@ export default function Home({ playlistStats }: { playlistStats: any }) {
         <div className="min-h-screen mx-6 sm:mx-20 md:mx-32 xl:mx-40 my-12 sm:my-24 flex flex-col justify-center">
           <Sections />
           <GithubStats />
-          <YoutubeStats stats={playlistStats} />
+          <YoutubeStats defaultStats={playlistStats} />
         </div>
         <Footer />
 

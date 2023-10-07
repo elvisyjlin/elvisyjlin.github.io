@@ -1,5 +1,6 @@
 import { Roboto } from "@next/font/google";
 import { numberWithCommas } from "@/utils";
+import { fetchMyPlaylistStats } from "@/core";
 import Link from "next/link";
 import Image from "next/image";
 import { FC, useEffect, useState } from "react";
@@ -127,14 +128,21 @@ const PrevArrow: FC<ArrowProps> = ({ className, style, onClick }) => {
 };
 
 type YoutubeStatsProps = {
-  stats: any;
+  defaultStats: any;
 };
 
-export const YoutubeStats: FC<YoutubeStatsProps> = ({ stats }) => {
+export const YoutubeStats: FC<YoutubeStatsProps> = ({ defaultStats }) => {
+  const [stats, setStats] = useState<any>(defaultStats);
+
   const views: number[] = stats.videos.map((video: any) => parseInt(video.statistics.viewCount));
   const totalViews = views.reduce((a, b) => a + b, 0);
   const likes: number[] = stats.videos.map((video: any) => parseInt(video.statistics.likeCount));
   const totalLikes = likes.reduce((a, b) => a + b, 0);
+
+  useEffect(() => {
+    fetchMyPlaylistStats().then((playlistStats: any) => setStats(playlistStats));
+  }, []);
+
   return (
     <section className="flex flex-col justify-center items-center gap-4 sm:gap-6 h-[80vh]">
       <FadeInSection className="w-full">
