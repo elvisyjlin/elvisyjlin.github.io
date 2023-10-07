@@ -27,6 +27,10 @@ export default function Home({ playlistStats }: { playlistStats: any }) {
         <title>Hello, I am Elvis</title>
         <meta name="description" content="Hello, I am Elvis" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta property="og:title" content="Hello, I am Elvis" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://elvisyjlin.github.io/" />
+        <meta property="og:image" content="https://elvisyjlin.github.io/preview.png" />
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
