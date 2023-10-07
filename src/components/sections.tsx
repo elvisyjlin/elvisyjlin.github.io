@@ -108,7 +108,7 @@ export const Hero: FC = () => {
         className="absolute sm:right-1/2 inset-y-0 z-10 flex flex-col sm:justify-center 
         sm:bg-none w-screen sm:w-fit"
       >
-        <div className="pl-6 sm:pl-20 md:pl-32 xl:pl-40 pr-6 sm:pr-0 py-12 mr-0 md:-mr-18">
+        <div className="pl-6 sm:pl-20 md:pl-32 xl:pl-40 pr-6 sm:pr-0 py-12 mr-0 md:-mr-18 xl:-mr-24">
           <h1
             style={playfairDisplay.style}
             className="scale-y-95 tracking-[.015em] font-bold 
@@ -118,7 +118,7 @@ export const Hero: FC = () => {
           >Hello, I am<br />Elvis</h1>
           <div className="mt-6 sm:mt-10 ml-[2px] pb-60 sm:pb-0 text-base sm:text-lg">
             <div className="flex gap-4 items-center">
-              <p className="font-semibold">aka Yu Jing Lin</p>
+              <p className="font-semibold">aka Yujing Lin</p>
               <MyLink href="https://github.com/elvisyjlin" target="_blank" rel="noreferrer">
                 <GithubIcon className="-mt-[2.5px] h-5 w-5 fill-current" />
               </MyLink>
