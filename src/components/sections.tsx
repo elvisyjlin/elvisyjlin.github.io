@@ -4,7 +4,7 @@ import { PAGE } from "@/constants";
 import { AcademicCapIcon, BookOpenIcon, BriefcaseIcon, FireIcon, LightBulbIcon } from "@heroicons/react/24/solid";
 import { Playfair_Display } from "@next/font/google";
 import Image from "next/image";
-import { FC, ReactNode, SVGProps, useEffect } from "react";
+import { FC, ReactNode, SVGProps, useEffect, useRef, useState } from "react";
 import { easeInOutExpo } from "./easingFn";
 import FadeInSection from "./fadein";
 import { GithubIcon, LinkedInIcon } from "./icons";
@@ -26,6 +26,8 @@ const sections = [
     name: "NEWS",
     icon: FireIcon,
     content: news,
+    collapsable: true,
+    minElements: 3,
   },
   {
     name: "CAREER",
@@ -168,18 +170,96 @@ type NamedSectionProps = {
   children?: ReactNode[] | ReactNode | string;
   name: string;
   Icon: FC<SVGProps<SVGSVGElement>>;
+  collapsable?: boolean;
+  minElements?: number;
 };
 
-export const NamedSection: FC<NamedSectionProps> = ({ children, name, Icon }) => {
+export const NamedSection: FC<NamedSectionProps> = ({
+  children,
+  name,
+  Icon,
+  collapsable,
+  minElements,
+}) => {
+  const [collapsed, setCollapsed] = useState<boolean>(true);
+  const [minHeight, setMinHeight] = useState<number>(216);
+  const [maxHeight, setMaxHeight] = useState<number>();
+  const ref = useRef<HTMLDivElement>(null);
+
+  function calculate() {
+    if (minElements && ref.current && ref.current.firstChild) {
+      const childNodes = Array.from(ref.current.firstChild.childNodes as NodeListOf<HTMLParagraphElement>);
+      let i = 0;
+      let minHeight = 0;
+      let maxHeight = 0;
+      childNodes.filter((childNode) => childNode.nodeName === "P")
+        .forEach((childNode) => {
+          const height = childNode.offsetHeight;
+          const style = window.getComputedStyle(childNode);
+          const marginTop = parseInt(style.marginTop);
+          const marginBottom = parseInt(style.marginBottom);
+          const paddingTop = parseInt(style.paddingTop);
+          const paddingBottom = parseInt(style.paddingBottom);
+          const outerHeight = height + marginTop + marginBottom + paddingTop + paddingBottom;
+          if (i < minElements) {
+            minHeight += outerHeight;
+          }
+          maxHeight += outerHeight;
+          i++;
+      });
+      setMinHeight(minHeight);
+      setMaxHeight(maxHeight);
+    }
+  };
+
+  useEffect(() => {
+    if (collapsable && minElements) {
+      calculate();
+      window.addEventListener("resize", calculate);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (collapsable && !collapsed && maxHeight && ref.current) {
+      ref.current.style.height = maxHeight + "px";
+    } else if (collapsable && collapsed && minHeight && ref.current) {
+      ref.current.style.height = minHeight + "px";
+    }
+  }, [collapsed, maxHeight, minHeight, ref.current]);
+
   return (
     <FadeInSection>
-      <section className="sm:grid sm:grid-cols-12 mb-8 gap-8 mx-auto max-w-[1200px]">
-        <div className="mb-3 sm:mb-8 sm:col-span-4 lg:col-span-3 3xl:col-span-2 flex gap-2.5 text-zinc-600">
-          <Icon className="h-5 mt-[2.5px]" />
-          <h2 className="text-lg font-semibold">{name}</h2>
-        </div>
-        <div className="sm:col-span-8 lg:col-span-9 3xl:col-span-10">{children}</div>
-      </section>
+      <div className="mb-8">
+        <section className="sm:grid sm:grid-cols-12 gap-8 mx-auto max-w-[1200px]">
+          <div className="mb-3 sm:mb-8 sm:col-span-4 lg:col-span-3 3xl:col-span-2 flex gap-2.5 text-zinc-600">
+            <Icon className="h-5 mt-[2.5px]" />
+            <h2 className="text-lg font-semibold">{name}</h2>
+          </div>
+          <div
+            className="sm:col-span-8 lg:col-span-9 3xl:col-span-10 overflow-hidden transition-all duration-500"
+            ref={ref}
+          >{children}</div>
+        </section>
+        {collapsable && (collapsed ? (
+          <div className="flex justify-center text-[#a1a1aa] text-sm sm:text-base">
+            <button onClick={() => setCollapsed(false)} className="flex items-center gap-1">
+              <span>More</span>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
+                <path fillRule="evenodd" d="M12.53 16.28a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 011.06-1.06L12 14.69l6.97-6.97a.75.75 0 111.06 1.06l-7.5 7.5z" clipRule="evenodd" />
+              </svg>
+            </button>
+          </div>
+        ) : (
+          <div className="flex justify-center text-[#a1a1aa] text-sm sm:text-base">
+            <button onClick={() => setCollapsed(true)} className="flex items-center gap-1">
+              <span>Collpase</span>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
+                <path fillRule="evenodd" d="M11.47 7.72a.75.75 0 011.06 0l7.5 7.5a.75.75 0 11-1.06 1.06L12 9.31l-6.97 6.97a.75.75 0 01-1.06-1.06l7.5-7.5z" clipRule="evenodd" />
+              </svg>
+            </button>
+          </div>
+        ))}
+      </div>
     </FadeInSection>
   );
 };
@@ -187,8 +267,14 @@ export const NamedSection: FC<NamedSectionProps> = ({ children, name, Icon }) =>
 export const Sections: FC = () => {
   return (
     <>{
-      sections.map(({ name, icon, content }) => (
-        <NamedSection key={name} name={name} Icon={icon}>
+      sections.map(({ name, icon, content, collapsable, minElements }) => (
+        <NamedSection
+          key={name}
+          name={name}
+          Icon={icon}
+          collapsable={collapsable}
+          minElements={minElements}
+        >
           <MyReactMarkdown>{content}</MyReactMarkdown>
         </NamedSection>
       ))
