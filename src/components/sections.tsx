@@ -51,10 +51,10 @@ const sections = [
       {
         name: "Produce 101 Ranker",
         img: {
-          src: "https://raw.githubusercontent.com/produce101jpthegirls/produce101jpthegirls.github.io/bc4c4db5597a2b58f628154cca44a47eb84935a2/public/assets/example.png",
+          src: "/projects/produce_101_ranker.webp",
           alt: "Produce 101 Ranker",
-          width: 2158,
-          height: 1596,
+          width: 1198,
+          height: 886,
         },
         href: "https://github.com/produce101jpthegirls/produce101jpthegirls.github.io",
       },
