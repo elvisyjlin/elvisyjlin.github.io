@@ -1,15 +1,32 @@
-import { GetStaticProps } from "next";
-import Head from "next/head";
 import Footer from "@/components/footer";
-import { Hero, Sections } from "@/components/sections";
-import { Source_Serif_Pro } from "@next/font/google";
-import { GithubStats, YoutubeStats } from "@/components/stats";
+import { Hero } from "@/components/sections";
 import { fetchMyPlaylistStats } from "@/core";
+import { Source_Serif_Pro } from "@next/font/google";
+import { GetStaticProps } from "next";
+import dynamic from "next/dynamic";
+import Head from "next/head";
+
+/* Lazy loading */
+const Sections = dynamic(() =>
+  import("@/components/sections").then((mod) => mod.Sections), {
+  loading: () => <p>Loading...</p>,
+});
+
+const GithubStats = dynamic(() =>
+  import("@/components/stats").then((mod) => mod.GithubStats), {
+  loading: () => <p>Loading...</p>,
+});
+
+const YoutubeStats = dynamic(() =>
+  import("@/components/stats").then((mod) => mod.YoutubeStats), {
+  loading: () => <p>Loading...</p>,
+});
 
 // const lexend = Lexend({ subsets: ["latin"], display: "swap" });
 const sourceSerifPro = Source_Serif_Pro({ weight: ["200", "300", "400", "600", "700", "900"], subsets: ["latin"], display: "swap" });
 // const sourceSerif4 = Source_Serif_4({ weight: ["200", "300", "400", "600", "700", "900"], subsets: ["latin"], display: "swap" });
 
+// Static site generation
 export const getStaticProps: GetStaticProps = async () => {
   const playlistStats = await fetchMyPlaylistStats();
   return {
