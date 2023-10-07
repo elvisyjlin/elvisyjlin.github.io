@@ -160,15 +160,15 @@ export const YoutubeStats: FC<YoutubeStatsProps> = ({ defaultStats }) => {
         >
           {stats.videos.slice(0, 5).map((video: any, index: number) => (
             <Link href={`https://youtu.be/${video.id}`} target="_blank" key={index}>
-            <div id="playlist-cover-wrapper">
-              <Image
-                id="playlist-cover"
-                src={video.snippet.thumbnails.standard.url}
-                alt="Playlist Cover"
-                width={320}
-                height={180}
-              />
-            </div>
+              <div id="playlist-cover-wrapper">
+                <Image
+                  id="playlist-cover"
+                  src={video.snippet.thumbnails.standard.url}
+                  alt="Playlist Cover"
+                  width={320}
+                  height={180}
+                />
+              </div>
             </Link>
           ))}
         </Slider>

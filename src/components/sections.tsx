@@ -53,6 +53,8 @@ const sections = [
         img: {
           src: "https://raw.githubusercontent.com/produce101jpthegirls/produce101jpthegirls.github.io/bc4c4db5597a2b58f628154cca44a47eb84935a2/public/assets/example.png",
           alt: "Produce 101 Ranker",
+          width: 2158,
+          height: 1596,
         },
         href: "https://github.com/produce101jpthegirls/produce101jpthegirls.github.io",
       },
@@ -305,11 +307,13 @@ const createSectionContent = (type: SectionType, content: any) => {
         className="sm:grid lg:grid-cols-2"
       >{content.map((item: any, index: number) => (
         <Link key={index} className="flex flex-col gap-2 items-center group" href={item.href} target="_blank">
-          <img
+          <Image
             className="border border-[#131313] group-hover:border-amber-600 
             rounded overflow-hidden transition-color duration-300"
             src={item.img.src}
             alt={item.img.alt}
+            width={item.img.width}
+            height={item.img.height}
           />
           <div className="text-sm sm:text-base text-[#131313] group-hover:text-amber-600 
           transition-color duration-300">{item.name}</div>
