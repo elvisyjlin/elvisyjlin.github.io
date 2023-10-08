@@ -1,5 +1,5 @@
 from scholarly import scholarly
-from google_scholar_py import CustomGoogleScholarProfiles
+
 
 arxiv_ids = [
     "1908.07269",
@@ -7,6 +7,7 @@ arxiv_ids = [
     "1805.02070",
     "1807.02933",
 ]
+
 
 if __name__ == "__main__":
     for arxiv_id in arxiv_ids:
