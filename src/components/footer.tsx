@@ -1,5 +1,4 @@
 import { FC } from "react";
-import { NextJSIcon, TailwindCSSIcon, TypeScriptIcon } from "./icons";
 
 const Footer: FC = () => {
   return (
