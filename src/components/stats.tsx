@@ -36,6 +36,8 @@ export const GithubStats: FC = () => {
     "&card_width=495"
   );
 
+  const contribUrl = "https://ghchart.rshah.org/131313/elvisyjlin";
+
   useEffect(() => {
     setScreenWidth(window.innerWidth);
     window.addEventListener("resize", (e) => {
@@ -57,6 +59,7 @@ export const GithubStats: FC = () => {
           width={495}
           height={195}
           loading="lazy"
+          unoptimized
         />
       </FadeInSection>
       <FadeInSection>
@@ -71,22 +74,24 @@ export const GithubStats: FC = () => {
           width={495}
           height={195}
           loading="lazy"
+          unoptimized
         />
       </FadeInSection>
       {/* Hide the Github contribution graph on small devices */}
       <FadeInSection className="hidden lg:block">
         <div className="p-6 border border-gray-200 rounded">
           {/* <img
-            src="https://ghchart.rshah.org/131313/elvisyjlin"
+            src={contribUrl}
             alt="Github Contributions of elvisyjlin"
           /> */}
           <Image
-            src="https://ghchart.rshah.org/131313/elvisyjlin"
+            src={contribUrl}
             alt="Github Contributions of elvisyjlin"
             // width={663}
             // height={104}
             width={730}
             height={114}
+            unoptimized
           />
         </div>
       </FadeInSection>
