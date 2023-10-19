@@ -28,10 +28,11 @@ export const GithubStats: FC = () => {
       <FadeInSection>
         <img
           src={
-            "https://github-readme-stats.vercel.app/api?" +
-            "username=elvisyjlin" +
+            "https://github-readme-stats.vercel.app/api" +
+            "?username=elvisyjlin" +
             "&count_private=true" +
             "&theme=graywhite" +
+            "&card_width=495" +
             "&show_icons=true" +
             "&disable_animations=true" +
             (screenWidth && screenWidth >= 640 ? "" : "&hide_rank=true")  // Hide rank if the window size is smaller than sm (640px)
@@ -56,6 +57,20 @@ export const GithubStats: FC = () => {
           alt="Github Stats of elvisyjlin"
           loading="lazy"
         /> */}
+      </FadeInSection>
+      <FadeInSection>
+        <img
+          src={
+            "https://streak-stats.demolab.com/" +
+            "?user=elvisyjlin" +
+            "&mode=weekly" +
+            "&theme=graywhite" +
+            "&border=e5e7eb" +
+            "&card_width=495"
+          }
+          alt="Github Weekly Streak Stats of elvisyjlin"
+          loading="lazy"
+        />
       </FadeInSection>
       {/* Hide the Github contribution graph on small devices */}
       <FadeInSection className="hidden lg:block">
@@ -95,7 +110,7 @@ type ArrowProps = {
 
 const NextArrow: FC<ArrowProps> = ({ className, style, onClick }) => {
   return (
-    <div className={`${className} invisible sm:visible`} style={{...style}} onClick={onClick}>
+    <div className={`${className} invisible sm:visible`} style={{ ...style }} onClick={onClick}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
@@ -112,7 +127,7 @@ const NextArrow: FC<ArrowProps> = ({ className, style, onClick }) => {
 
 const PrevArrow: FC<ArrowProps> = ({ className, style, onClick }) => {
   return (
-    <div className={`${className} invisible sm:visible`} style={{...style}} onClick={onClick}>
+    <div className={`${className} invisible sm:visible`} style={{ ...style }} onClick={onClick}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
