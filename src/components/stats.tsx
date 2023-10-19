@@ -188,6 +188,7 @@ export const YoutubeStats: FC<YoutubeStatsProps> = ({ defaultStats }) => {
                   alt="Playlist Cover"
                   width={320}
                   height={180}
+                  unoptimized
                 />
               </div>
             </Link>
