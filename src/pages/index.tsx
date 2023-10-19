@@ -1,7 +1,7 @@
 import Footer from "@/components/footer";
 import { Hero } from "@/components/sections";
 import { fetchMyPlaylistStats } from "@/core";
-import { Source_Serif_Pro } from "@next/font/google";
+import { Source_Serif_4 } from "next/font/google";
 import { GetStaticProps } from "next";
 import dynamic from "next/dynamic";
 import Head from "next/head";
@@ -23,8 +23,8 @@ const YoutubeStats = dynamic(() =>
 });
 
 // const lexend = Lexend({ subsets: ["latin"], display: "swap" });
-const sourceSerifPro = Source_Serif_Pro({ weight: ["200", "300", "400", "600", "700", "900"], subsets: ["latin"], display: "swap" });
-// const sourceSerif4 = Source_Serif_4({ weight: ["200", "300", "400", "600", "700", "900"], subsets: ["latin"], display: "swap" });
+// const sourceSerifPro = Source_Serif_Pro({ weight: ["200", "300", "400", "600", "700", "900"], subsets: ["latin"], display: "swap" });
+const sourceSerif4 = Source_Serif_4({ weight: ["200", "300", "400", "600", "700", "900"], subsets: ["latin"], display: "swap" });
 
 // Static site generation
 export const getStaticProps: GetStaticProps = async () => {
@@ -53,7 +53,7 @@ export default function Home({ playlistStats }: { playlistStats: any }) {
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
       </Head>
-      <main style={sourceSerifPro.style} className="text-lg text-photo-black leading-snug sm:leading-normal">
+      <main style={sourceSerif4.style} className="text-lg text-photo-black leading-snug sm:leading-normal">
         <Hero />
         <div className="min-h-screen mx-6 sm:mx-20 md:mx-32 xl:mx-40 my-12 sm:my-24 flex flex-col justify-center">
           <Sections />

@@ -1,8 +1,8 @@
-import { Roboto } from "@next/font/google";
 import { numberWithCommas } from "@/utils";
 import { fetchMyPlaylistStats } from "@/core";
-import Link from "next/link";
+import { Roboto } from "next/font/google";
 import Image from "next/image";
+import Link from "next/link";
 import { FC, useEffect, useState } from "react";
 import Slider from "react-slick";
 import { UnderlineLink } from "./links";
@@ -16,6 +16,26 @@ const roboto = Roboto({ weight: ["400", "500", "700"], subsets: ["latin"], displ
 export const GithubStats: FC = () => {
   const [screenWidth, setScreenWidth] = useState<number>();
 
+  const statsUrl = (
+    "https://github-readme-stats.vercel.app/api" +
+    "?username=elvisyjlin" +
+    "&count_private=true" +
+    "&theme=graywhite" +
+    "&card_width=495" +
+    "&show_icons=true" +
+    "&disable_animations=true" +
+    (screenWidth && screenWidth >= 640 ? "" : "&hide_rank=true")  // Hide rank if the window size is smaller than sm (640px)
+  );
+
+  const streakUrl = (
+    "https://streak-stats.demolab.com/" +
+    "?user=elvisyjlin" +
+    "&mode=weekly" +
+    "&theme=graywhite" +
+    "&border=e5e7eb" +
+    "&card_width=495"
+  );
+
   useEffect(() => {
     setScreenWidth(window.innerWidth);
     window.addEventListener("resize", (e) => {
@@ -24,69 +44,50 @@ export const GithubStats: FC = () => {
   }, []);
 
   return (
-    <section className="flex flex-col justify-center items-center gap-4 sm:gap-6 h-[80vh]">
+    <section className="flex flex-col justify-center items-center gap-4 sm:gap-6 h-[80vh] sm:h-[100vh]">
       <FadeInSection>
-        <img
-          src={
-            "https://github-readme-stats.vercel.app/api" +
-            "?username=elvisyjlin" +
-            "&count_private=true" +
-            "&theme=graywhite" +
-            "&card_width=495" +
-            "&show_icons=true" +
-            "&disable_animations=true" +
-            (screenWidth && screenWidth >= 640 ? "" : "&hide_rank=true")  // Hide rank if the window size is smaller than sm (640px)
-          }
-          alt="Github Stats of elvisyjlin"
-          loading="lazy"
-        />
-        {/* <Image
-          src={
-            "https://github-readme-stats.vercel.app/api?" +
-            "username=elvisyjlin" +
-            "&count_private=true" +
-            "&theme=graywhite" +
-            "&show_icons=true" +
-            "&disable_animations=true" +
-            (screenWidth && screenWidth >= 640 ? "" : "&hide_rank=true")  // Hide rank if the window size is smaller than sm (640px)
-          }
-          // width={450}
-          // height={195}
-          width={510}
-          height={221}
+        {/* <img
+          src={statsUrl}
           alt="Github Stats of elvisyjlin"
           loading="lazy"
         /> */}
+        <Image
+          src={statsUrl}
+          alt="Github Stats of elvisyjlin"
+          width={495}
+          height={195}
+          loading="lazy"
+        />
       </FadeInSection>
       <FadeInSection>
-        <img
-          src={
-            "https://streak-stats.demolab.com/" +
-            "?user=elvisyjlin" +
-            "&mode=weekly" +
-            "&theme=graywhite" +
-            "&border=e5e7eb" +
-            "&card_width=495"
-          }
+        {/* <img
+          src={streakUrl}
           alt="Github Weekly Streak Stats of elvisyjlin"
+          loading="lazy"
+        /> */}
+        <Image
+          src={streakUrl}
+          alt="Github Weekly Streak Stats of elvisyjlin"
+          width={495}
+          height={195}
           loading="lazy"
         />
       </FadeInSection>
       {/* Hide the Github contribution graph on small devices */}
       <FadeInSection className="hidden lg:block">
         <div className="p-6 border border-gray-200 rounded">
-          <img
+          {/* <img
             src="https://ghchart.rshah.org/131313/elvisyjlin"
             alt="Github Contributions of elvisyjlin"
-          />
-          {/* <Image
+          /> */}
+          <Image
             src="https://ghchart.rshah.org/131313/elvisyjlin"
             alt="Github Contributions of elvisyjlin"
             // width={663}
             // height={104}
             width={730}
             height={114}
-          /> */}
+          />
         </div>
       </FadeInSection>
       <FadeInSection>
@@ -159,7 +160,7 @@ export const YoutubeStats: FC<YoutubeStatsProps> = ({ defaultStats }) => {
   }, []);
 
   return (
-    <section className="flex flex-col justify-center items-center gap-4 sm:gap-6 h-[80vh]">
+    <section className="flex flex-col justify-center items-center gap-4 sm:gap-6 h-[80vh] sm:h-[100vh]">
       <FadeInSection className="w-full">
         <h2 className="text-lg font-semibold text-center word-space-wide">DANCE VIDEOS</h2>
       </FadeInSection>

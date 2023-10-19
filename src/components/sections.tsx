@@ -9,7 +9,7 @@ import {
   LightBulbIcon,
   RocketLaunchIcon,
 } from "@heroicons/react/24/solid";
-import { Playfair_Display } from "@next/font/google";
+import { Playfair_Display } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
 import { FC, ReactNode, SVGProps, useCallback, useEffect, useRef, useState } from "react";
@@ -221,8 +221,8 @@ export const HeroPreview: FC = () => {
           <div className="mt-6 sm:mt-10 ml-[2px] pb-60 sm:pb-0 text-lg sm:text-xl">
             <div className="flex gap-4 items-center">
               <p className="font-semibold">aka Yujing Lin</p>
-                <GithubIcon className="-mt-[3px] h-6 w-6 fill-current" />
-                <LinkedInIcon className="-mt-[3px] h-6 w-6 fill-current" />
+              <GithubIcon className="-mt-[3px] h-6 w-6 fill-current" />
+              <LinkedInIcon className="-mt-[3px] h-6 w-6 fill-current" />
             </div>
           </div>
         </div>
@@ -284,7 +284,7 @@ export const NamedSection: FC<NamedSectionProps> = ({
           }
           maxHeight += outerHeight;
           i++;
-      });
+        });
       setMinHeight(minHeight);
       setMaxHeight(maxHeight);
     }
@@ -330,7 +330,7 @@ export const NamedSection: FC<NamedSectionProps> = ({
               }>
                 <path fillRule="evenodd" d="M12.53 16.28a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 011.06-1.06L12 14.69l6.97-6.97a.75.75 0 111.06 1.06l-7.5 7.5z" clipRule="evenodd" />
               </svg>
-              <span className="w-[128px] text-left">{collapsed ? "Tap to Read More" : "Tap to Hide"}</span>
+              <span className="w-[132px] text-left">{collapsed ? "Tap to Read More" : "Tap to Hide"}</span>
             </button>
           </div>
         )}
@@ -361,7 +361,7 @@ const createSectionContent = (type: SectionType, content: any) => {
           transition-color duration-300">{item.name}</div>
         </Link>
       ))
-      }</div>
+        }</div>
     );
   }
   throw Error(`Unsupported section type: ${type}`);
