@@ -1,6 +1,6 @@
 import { numberWithCommas } from "@/utils";
-import { fetchMyPlaylistStats } from "@/core";
-import { Roboto } from "next/font/google";
+import { PlaylistStats, fetchMyPlaylistStats } from "@/core";
+import { Noto_Sans, Roboto } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
 import { FC, useEffect, useState } from "react";
@@ -11,6 +11,7 @@ import FadeInSection from "./fadein";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
+const notoSans = Noto_Sans({ weight: ["400", "500", "600", "700"], subsets: ["latin"], display: "swap" });
 const roboto = Roboto({ weight: ["400", "500", "700"], subsets: ["latin"], display: "swap" });
 
 export const GithubStats: FC = () => {
@@ -21,10 +22,10 @@ export const GithubStats: FC = () => {
     "?username=elvisyjlin" +
     "&count_private=true" +
     "&theme=graywhite" +
-    "&card_width=495" +
+    (screenWidth && (screenWidth >= 640) ? "&card_width=495" : "") +
     "&show_icons=true" +
     "&disable_animations=true" +
-    (screenWidth && screenWidth >= 640 ? "" : "&hide_rank=true")  // Hide rank if the window size is smaller than sm (640px)
+    (screenWidth && (screenWidth >= 640) ? "" : "&hide_rank=true")  // Hide rank if the window size is smaller than sm (640px)
   );
 
   const streakUrl = (
@@ -33,7 +34,8 @@ export const GithubStats: FC = () => {
     "&mode=weekly" +
     "&theme=graywhite" +
     "&border=e5e7eb" +
-    "&card_width=495"
+    (screenWidth && (screenWidth >= 640) ? "&card_width=495" : `&card_width=${screenWidth ?? 495}`) +
+    "&hide_current_streak=false"
   );
 
   const contribUrl = "https://ghchart.rshah.org/131313/elvisyjlin";
@@ -48,11 +50,6 @@ export const GithubStats: FC = () => {
   return (
     <section className="flex flex-col justify-center items-center gap-4 sm:gap-6 h-[80vh] sm:h-[100vh]">
       <FadeInSection>
-        {/* <img
-          src={statsUrl}
-          alt="Github Stats of elvisyjlin"
-          loading="lazy"
-        /> */}
         <Image
           src={statsUrl}
           alt="Github Stats of elvisyjlin"
@@ -63,11 +60,6 @@ export const GithubStats: FC = () => {
         />
       </FadeInSection>
       <FadeInSection>
-        {/* <img
-          src={streakUrl}
-          alt="Github Weekly Streak Stats of elvisyjlin"
-          loading="lazy"
-        /> */}
         <Image
           src={streakUrl}
           alt="Github Weekly Streak Stats of elvisyjlin"
@@ -80,10 +72,6 @@ export const GithubStats: FC = () => {
       {/* Hide the Github contribution graph on small devices */}
       <FadeInSection className="hidden lg:block">
         <div className="p-6 border border-gray-200 rounded">
-          {/* <img
-            src={contribUrl}
-            alt="Github Contributions of elvisyjlin"
-          /> */}
           <Image
             src={contribUrl}
             alt="Github Contributions of elvisyjlin"
@@ -149,25 +137,25 @@ const PrevArrow: FC<ArrowProps> = ({ className, style, onClick }) => {
 };
 
 type YoutubeStatsProps = {
-  defaultStats: any;
+  defaultStats: PlaylistStats;
 };
 
 export const YoutubeStats: FC<YoutubeStatsProps> = ({ defaultStats }) => {
-  const [stats, setStats] = useState<any>(defaultStats);
+  const [stats, setStats] = useState<PlaylistStats>(defaultStats);
 
-  const views: number[] = stats.videos.map((video: any) => parseInt(video.statistics.viewCount));
+  const views: number[] = stats.videos.map((video) => parseInt(video.viewCount));
   const totalViews = views.reduce((a, b) => a + b, 0);
-  const likes: number[] = stats.videos.map((video: any) => parseInt(video.statistics.likeCount));
+  const likes: number[] = stats.videos.map((video) => parseInt(video.likeCount));
   const totalLikes = likes.reduce((a, b) => a + b, 0);
 
   useEffect(() => {
-    fetchMyPlaylistStats().then((playlistStats: any) => setStats(playlistStats));
+    fetchMyPlaylistStats().then((playlistStats: PlaylistStats) => setStats(playlistStats));
   }, []);
 
   return (
     <section className="flex flex-col justify-center items-center gap-4 sm:gap-6 h-[80vh] sm:h-[100vh]">
       <FadeInSection className="w-full">
-        <h2 className="text-lg font-semibold text-center word-space-wide">DANCE VIDEOS</h2>
+        <h2 className="text-lg font-semibold text-center word-space-wide" style={notoSans.style}>DANCE VIDEOS</h2>
       </FadeInSection>
       <FadeInSection className="w-full sm:w-[507px] pb-3 sm:pb-1">
         <Slider
@@ -179,12 +167,12 @@ export const YoutubeStats: FC<YoutubeStatsProps> = ({ defaultStats }) => {
           nextArrow={<NextArrow />}
           prevArrow={<PrevArrow />}
         >
-          {stats.videos.slice(0, 5).map((video: any, index: number) => (
+          {stats.videos.slice(0, 5).map((video, index) => (
             <Link href={`https://youtu.be/${video.id}`} target="_blank" key={index}>
               <div id="playlist-cover-wrapper">
                 <Image
                   id="playlist-cover"
-                  src={video.snippet.thumbnails.standard.url}
+                  src={video.thumbnail}
                   alt="Playlist Cover"
                   width={320}
                   height={180}
@@ -196,19 +184,19 @@ export const YoutubeStats: FC<YoutubeStatsProps> = ({ defaultStats }) => {
         </Slider>
       </FadeInSection>
       <FadeInSection>
-        <table className="table-auto">
+        <table className="table-auto mt-1.5 sm:mt-3" style={notoSans.style}>
           <tbody>
             <tr>
-              <td className="font-semibold text-right pr-2">{numberWithCommas(totalViews)}</td>
-              <td className="text-left">total views</td>
+              <td className="align-bottom font-semibold text-right pr-2 sm:font-semibold sm:text-xl">{numberWithCommas(totalViews)}</td>
+              <td className="align-bottom text-left text-sm sm:text-base">total views</td>
             </tr>
             <tr>
-              <td className="font-semibold text-right pr-2">{numberWithCommas(totalLikes)}</td>
-              <td className="text-left">total likes</td>
+              <td className="align-bottom font-semibold text-right pr-2 sm:font-semibold sm:text-xl">{numberWithCommas(totalLikes)}</td>
+              <td className="align-bottom text-left text-sm sm:text-base">total likes</td>
             </tr>
             <tr>
-              <td className="font-semibold text-right pr-2">{numberWithCommas(stats.videos.length)}</td>
-              <td className="text-left">videos</td>
+              <td className="align-bottom font-semibold text-right pr-2 sm:font-semibold sm:text-xl">{numberWithCommas(stats.videos.length)}</td>
+              <td className="align-bottom text-left text-sm sm:text-base">videos</td>
             </tr>
           </tbody>
         </table>

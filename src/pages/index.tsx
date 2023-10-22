@@ -1,6 +1,6 @@
 import Footer from "@/components/footer";
 import { Hero } from "@/components/sections";
-import { fetchMyPlaylistStats } from "@/core";
+import { PlaylistStats, fetchMyPlaylistStats } from "@/core";
 import { Source_Serif_4 } from "next/font/google";
 import { GetStaticProps } from "next";
 import dynamic from "next/dynamic";
@@ -37,7 +37,7 @@ export const getStaticProps: GetStaticProps = async () => {
   };
 };
 
-export default function Home({ playlistStats }: { playlistStats: any }) {
+export default function Home({ playlistStats }: { playlistStats: PlaylistStats }) {
   return (
     <>
       <Head>
