@@ -1,7 +1,7 @@
 NLP Model Engineer at [Microsoft](https://www.microsoft.com/)  
 <light>Mar. 2023 - Current, Visual Document Intelligence. We build Azure Form Recognizer with OpenAI.</light>
 
-CTO / Co-Founder of [Genki](https://genki.io/)  
+CTO / Co-Founder of [Genki](https://twitter.com/Genki_io)  
 <light>Jul. 2022 - Feb. 2023, Web 3.0 Marketing Solutions</light>
 
 NLP Model Engineer at [Microsoft](https://www.microsoft.com/)  
