@@ -9,7 +9,7 @@ import {
   LightBulbIcon,
   RocketLaunchIcon,
 } from "@heroicons/react/24/solid";
-import { Playfair_Display } from "next/font/google";
+import { Roboto } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
 import { FC, ReactNode, SVGProps, useCallback, useEffect, useRef, useState } from "react";
@@ -27,7 +27,8 @@ import education from "@/contents/education.md";
 import MyReactMarkdown from "./markdown";
 import portraitPic from "../../public/portrait_2000w.webp";
 
-const playfairDisplay = Playfair_Display({ subsets: ["latin"], display: "swap" });
+// const playfairDisplay = Playfair_Display({ subsets: ["latin"], display: "swap" });
+const roboto = Roboto({ weight: ["300", "400", "500", "700", "900", "100"], subsets: ["latin"], display: "swap" });
 
 enum SectionType {
   Markdown,
@@ -145,15 +146,19 @@ export const Hero: FC = () => {
       >
         <div className="pl-6 sm:pl-20 md:pl-32 xl:pl-40 pr-6 sm:pr-0 py-12 mr-0 md:-mr-18 xl:-mr-24">
           <h1
-            style={playfairDisplay.style}
-            className="scale-y-95 tracking-[.015em] font-bold 
-            text-4xl sm:text-5xl sm:leading-[1.1] 
-            md:text-6xl md:leading-[1.1] 
+            style={roboto.style}
+            className="tracking-[.015em]
+            text-4xl leading-tight
+            sm:text-5xl sm:leading-[1.1]
+            md:text-6xl md:leading-[1.1]
             xl:text-7xl xl:leading-[1.1]"
-          >Hello, I am<br />Elvis</h1>
-          <div className="mt-6 sm:mt-10 ml-[2px] pb-60 sm:pb-0 text-base sm:text-lg">
+          >
+            <p className="font-light">Hello, I am</p>
+            <p className="font-bold">Elvis</p>
+          </h1>
+          <div className="mt-1 sm:mt-2 ml-[2px] pb-60 sm:pb-0 text-base sm:text-lg">
             <div className="flex gap-4 items-center">
-              <p className="font-semibold">aka Yujing Lin</p>
+              <p className="font-base md:font-medium">aka Yujing Lin</p>
               <MyLink href="https://github.com/elvisyjlin" target="_blank" rel="noreferrer">
                 <GithubIcon className="-mt-[2.5px] h-5 w-5 fill-current" />
               </MyLink>
@@ -161,6 +166,8 @@ export const Hero: FC = () => {
                 <LinkedInIcon className="-mt-[2.5px] h-5 w-5 fill-current" />
               </MyLink>
             </div>
+            <br />
+            <br />
             <br />
             <MyReactMarkdown>{intro}</MyReactMarkdown>
             <br />
@@ -212,15 +219,19 @@ export const HeroPreview: FC = () => {
       >
         <div className="pl-6 sm:pl-20 md:pl-32 xl:pl-40 pr-6 sm:pr-0 py-12 mr-0 md:-mr-18 xl:-mr-24">
           <h1
-            style={playfairDisplay.style}
-            className="scale-y-95 tracking-[.015em] font-bold 
-            text-4xl sm:text-5xl sm:leading-[1.1] 
-            md:text-6xl md:leading-[1.1] 
+            style={roboto.style}
+            className="tracking-[.015em]
+            text-4xl leading-tight
+            sm:text-5xl sm:leading-[1.1]
+            md:text-6xl md:leading-[1.1]
             xl:text-7xl xl:leading-[1.1]"
-          >Hello, I am<br />Elvis</h1>
+          >
+            <p className="font-light">Hello, I am</p>
+            <p className="font-bold">Elvis</p>
+          </h1>
           <div className="mt-6 sm:mt-10 ml-[2px] pb-60 sm:pb-0 text-lg sm:text-xl">
             <div className="flex gap-4 items-center">
-              <p className="font-semibold">aka Yujing Lin</p>
+              <p className="font-base md:font-medium">aka Yujing Lin</p>
               <GithubIcon className="-mt-[3px] h-6 w-6 fill-current" />
               <LinkedInIcon className="-mt-[3px] h-6 w-6 fill-current" />
             </div>
@@ -312,7 +323,7 @@ export const NamedSection: FC<NamedSectionProps> = ({
         <section className="sm:grid sm:grid-cols-12 gap-8 mx-auto max-w-[1200px]">
           <div className="mb-3 sm:mb-8 sm:col-span-4 lg:col-span-3 3xl:col-span-2 flex gap-2.5 text-zinc-600">
             <Icon className="h-5 mt-[2.5px]" />
-            <h2 className="text-lg font-semibold">{name}</h2>
+            <h2 className="text-lg font-medium">{name}</h2>
           </div>
           <div
             className="sm:col-span-8 lg:col-span-9 3xl:col-span-10 overflow-hidden transition-all duration-700 ease-in"
