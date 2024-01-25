@@ -208,7 +208,7 @@ export const YoutubeStats: FC<YoutubeStatsProps> = ({ defaultStats }) => {
           href={stats.url}
           target="_blank"
           rel="noreferrer"
-        >Visit My Playlist</UnderlineLink>
+        >Watch My Videos</UnderlineLink>
       </FadeInSection>
     </section>
   )

@@ -201,7 +201,7 @@ export const Hero: FC = () => {
           src={portraitPic}
           alt="Portrait"
           sizes="(max-width: 768px) 100vw, 50vw"
-          className="absolute bottom-0 opacity-0 sm:opacity-100 pl-10 lg:pl-0 ml-0 lg:-ml-20 pr-4 sm:pr-10 
+          className="absolute bottom-0 opacity-0 sm:opacity-100 pl-10 lg:pl-0 ml-0 lg:-ml-10 xl:-ml-10 2xl:-ml-20 pr-4 sm:pr-10 
           object-contain max-h-screen"
         />
       </div>
