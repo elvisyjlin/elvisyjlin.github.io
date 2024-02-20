@@ -6,7 +6,6 @@ import Link from "next/link";
 import { FC, useEffect, useState } from "react";
 import Slider from "react-slick";
 import { UnderlineLink } from "./links";
-import FadeInSection from "./fadein";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -49,7 +48,7 @@ export const GithubStats: FC = () => {
 
   return (
     <section className="flex flex-col justify-center items-center gap-4 sm:gap-6 h-[80vh] sm:h-[100vh]">
-      <FadeInSection>
+      <div>
         <Image
           src={statsUrl}
           alt="Github Stats of elvisyjlin"
@@ -58,8 +57,8 @@ export const GithubStats: FC = () => {
           loading="lazy"
           unoptimized
         />
-      </FadeInSection>
-      <FadeInSection>
+      </div>
+      <div>
         <Image
           src={streakUrl}
           alt="Github Weekly Streak Stats of elvisyjlin"
@@ -68,9 +67,9 @@ export const GithubStats: FC = () => {
           loading="lazy"
           unoptimized
         />
-      </FadeInSection>
+      </div>
       {/* Hide the Github contribution graph on small devices */}
-      <FadeInSection className="hidden lg:block">
+      <div className="hidden lg:block">
         <div className="p-6 border border-gray-200 rounded">
           <Image
             src={contribUrl}
@@ -82,8 +81,8 @@ export const GithubStats: FC = () => {
             unoptimized
           />
         </div>
-      </FadeInSection>
-      <FadeInSection>
+      </div>
+      <div>
         <UnderlineLink
           style={roboto.style}
           className="sm:text-lg font-medium scale-y-90 text-github-dark opacity-95"
@@ -91,7 +90,7 @@ export const GithubStats: FC = () => {
           target="_blank"
           rel="noreferrer"
         >Visit My GitHub</UnderlineLink>
-      </FadeInSection>
+      </div>
     </section>
   );
 };
@@ -154,10 +153,10 @@ export const YoutubeStats: FC<YoutubeStatsProps> = ({ defaultStats }) => {
 
   return (
     <section className="flex flex-col justify-center items-center gap-4 sm:gap-6 h-[80vh] sm:h-[100vh]">
-      <FadeInSection className="w-full">
+      <div className="w-full">
         <h2 className="text-lg font-semibold text-center word-space-wide" style={notoSans.style}>DANCE VIDEOS</h2>
-      </FadeInSection>
-      <FadeInSection className="w-full sm:w-[507px] pb-3 sm:pb-1">
+      </div>
+      <div className="w-full sm:w-[507px] pb-3 sm:pb-1">
         <Slider
           dots
           autoplay
@@ -182,8 +181,8 @@ export const YoutubeStats: FC<YoutubeStatsProps> = ({ defaultStats }) => {
             </Link>
           ))}
         </Slider>
-      </FadeInSection>
-      <FadeInSection>
+      </div>
+      <div>
         <table className="table-auto mt-1.5 sm:mt-3" style={notoSans.style}>
           <tbody>
             <tr>
@@ -200,8 +199,8 @@ export const YoutubeStats: FC<YoutubeStatsProps> = ({ defaultStats }) => {
             </tr>
           </tbody>
         </table>
-      </FadeInSection>
-      <FadeInSection>
+      </div>
+      <div>
         <UnderlineLink
           style={roboto.style}
           className="sm:text-lg font-medium scale-y-90 text-github-dark opacity-95"
@@ -209,7 +208,7 @@ export const YoutubeStats: FC<YoutubeStatsProps> = ({ defaultStats }) => {
           target="_blank"
           rel="noreferrer"
         >Watch My Videos</UnderlineLink>
-      </FadeInSection>
+      </div>
     </section>
   )
 };
