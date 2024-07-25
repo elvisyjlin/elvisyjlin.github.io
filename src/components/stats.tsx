@@ -47,7 +47,7 @@ export const GithubStats: FC = () => {
   }, []);
 
   return (
-    <section className="flex flex-col justify-center items-center gap-4 sm:gap-6 h-[80vh] sm:h-[100vh]">
+    <section className="flex flex-col justify-center items-center gap-4 sm:gap-6 h-[90vh]">
       <div>
         <Image
           src={statsUrl}
@@ -81,6 +81,14 @@ export const GithubStats: FC = () => {
             unoptimized
           />
         </div>
+      </div>
+      <div className="hidden lg:block">
+        <img
+          src={
+            "https://github-profile-trophy.vercel.app/?username=elvisyjlin" +
+            (screenWidth && screenWidth > 1024 ? "&row=1&column=8" : "&row=2&column=4")
+          }
+        />
       </div>
       <div>
         <UnderlineLink
@@ -152,7 +160,7 @@ export const YoutubeStats: FC<YoutubeStatsProps> = ({ defaultStats }) => {
   }, []);
 
   return (
-    <section className="flex flex-col justify-center items-center gap-4 sm:gap-6 h-[80vh] sm:h-[100vh]">
+    <section className="flex flex-col justify-center items-center gap-4 sm:gap-6 lg:mt-20 h-[90vh]">
       <div className="w-full">
         <h2 className="text-lg font-semibold text-center word-space-wide" style={notoSans.style}>DANCE VIDEOS</h2>
       </div>

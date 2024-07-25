@@ -143,31 +143,45 @@ export const Hero: FC = () => {
         className="absolute sm:right-1/2 inset-y-0 z-10 flex flex-col sm:justify-center 
         sm:bg-none w-screen sm:w-fit"
       >
-        <div className="pl-6 sm:pl-20 md:pl-32 xl:pl-40 pr-6 sm:pr-0 py-12 mr-0 md:-mr-18 xl:-mr-24">
-          <h1
-            style={roboto.style}
-            className="tracking-[.015em]
-            text-4xl leading-tight
-            sm:text-5xl sm:leading-[1.1]
-            md:text-6xl md:leading-[1.1]
-            xl:text-7xl xl:leading-[1.1]"
-          >
-            <p className="font-light">Hello, I am</p>
-            <p className="font-bold">Elvis</p>
-          </h1>
-          <div className="mt-1 sm:mt-2 ml-[2px] pb-60 sm:pb-0 text-base sm:text-lg">
-            <div className="flex gap-4 items-center">
-              <p className="font-base md:font-medium">aka Yujing Lin</p>
-              <MyLink href="https://github.com/elvisyjlin" target="_blank" rel="noreferrer">
-                <GithubIcon className="-mt-[2.5px] h-5 w-5 fill-current" />
+        <div className="h-full flex flex-col sm:justify-between gap-8
+        pl-6 sm:pl-20 md:pl-32 xl:pl-40 pr-6 sm:pr-0 py-20 sm:py-32 mr-0 md:-mr-18 xl:-mr-24">
+          <div>
+            <h1
+              style={roboto.style}
+              className="tracking-[.015em]
+              text-4xl leading-tight
+              sm:text-5xl sm:leading-[1.1]
+              md:text-6xl md:leading-[1.1]
+              xl:text-7xl xl:leading-[1.1]"
+            >
+              <p className="font-light">Hello, I am</p>
+              <p className="font-bold">Elvis</p>
+            </h1>
+            <div className="flex flex-row gap-4 items-center mt-1.5 sm:mt-3.5 ml-[2px] sm:ml-1">
+              <p className="text-base sm:text-lg font-normal">aka Yujing Lin</p>
+              <p>•</p>
+              <MyLink
+                href="https://github.com/elvisyjlin"
+                target="_blank"
+                rel="noreferrer"
+                className="flex gap-1.5 items-center"
+              >
+                <GithubIcon className="-mt-[2.5px] h-4 w-4 fill-current" />
+                <span className="hidden sm:inline">GitHub</span>
               </MyLink>
-              <MyLink href="https://www.linkedin.com/in/elvisyjlin" target="_blank" rel="noreferrer">
-                <LinkedInIcon className="-mt-[2.5px] h-5 w-5 fill-current" />
+              <p>•</p>
+              <MyLink
+                href="https://www.linkedin.com/in/elvisyjlin"
+                target="_blank"
+                rel="noreferrer"
+                className="flex gap-1.5 items-center"
+              >
+                <LinkedInIcon className="-mt-[2.5px] h-4 w-4 fill-current" />
+                <span className="hidden sm:inline">LinkedIn</span>
               </MyLink>
             </div>
-            <br />
-            <br />
-            <br />
+          </div>
+          <div className="ml-[2px] sm:ml-1 pb-0 text-base sm:text-lg">
             <MyReactMarkdown>{intro}</MyReactMarkdown>
             <br />
             <div className="mt-1 sm:mt-0 flex flex-wrap gap-x-1.5 sm:gap-x-2">

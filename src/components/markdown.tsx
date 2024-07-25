@@ -9,7 +9,7 @@ type MyReactMarkdownProps = {
 const MyReactMarkdown: FC<MyReactMarkdownProps> = ({ children }) => (
   <ReactMarkdown
     className="prose lg:prose-lg max-w-none
-    prose-headings:font-semibold
+    prose-headings:font-semibold prose-headings:mb-0
     prose-p:mt-0 prose-p:mb-3 sm:prose-p:mb-4
     prose-p:leading-6 sm:prose-p:leading-7
     prose-strong:font-normal prose-strong:underline prose-strong:underline-offset-2 sm:prose-strong:underline-offset-[2.5px]
