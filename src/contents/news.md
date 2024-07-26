@@ -9,11 +9,3 @@ We also **won the 1st Prize** of [Taipei TON Hackathon](https://www.blocktempo.c
 
 Genki, my startup, was selected as one of the teams in [AppWorks Accelerator](https://appworks.tw/) Batch #25.  
 <light>2022</light>
-
-I was honored to **receive the Annual Best Member Award** of my team in [Microsoft](https://www.microsoft.com). (2 out of 20)  
-<light>2021</light>
-
-My friends and I **won the 2nd Prize** of the adult group in the [popular dance contest](https://www.beclass.com/rid=2343d045f05dcb812702).
-
-I started to work at [Microsoft](https://www.microsoft.com).  
-<light>2020</light>
