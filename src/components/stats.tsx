@@ -24,6 +24,7 @@ export const GithubStats: FC = () => {
     (screenWidth && (screenWidth >= 640) ? "&card_width=495" : "") +
     "&show_icons=true" +
     "&disable_animations=true" +
+    "&number_format=long" +
     (screenWidth && (screenWidth >= 640) ? "" : "&hide_rank=true")  // Hide rank if the window size is smaller than sm (640px)
   );
 
